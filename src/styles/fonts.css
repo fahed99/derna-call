@@ -1,0 +1,23 @@
+/* Medium */
+@font-face {
+	font-family: "Noto Sans Arabic";
+	src: url("/fonts/notosans-arabic-medium.ttf") format("truetype");
+	font-weight: 500; /* Medium font weight */
+	font-style: normal;
+}
+
+/* SemiBold */
+@font-face {
+	font-family: "Noto Sans Arabic";
+	src: url("/fonts/notosans-arabic-semibold.ttf") format("truetype");
+	font-weight: 600; /* SemiBold font weight */
+	font-style: normal;
+}
+
+/* Bold */
+@font-face {
+	font-family: "Noto Sans Arabic";
+	src: url("/fonts/notosans-arabic-bold.ttf") format("truetype");
+	font-weight: 700; /* Bold font weight */
+	font-style: normal;
+}
