@@ -17,7 +17,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
 			<div className="w-full flex justify-center">
 				<MainLogo size={230} color="" />
 			</div>
-			<div className="w-[55%]">
+			<div className="md:w-[55%]">
 				<div className="flex font-semibold tracking-wide text-primary-100 text-lg justify-start text-right items-end flex-row-reverse rtl">
 					<div className="w-[30%]">نوع الطلب</div>
 					<div className="w-[30%]">العنوان</div>
