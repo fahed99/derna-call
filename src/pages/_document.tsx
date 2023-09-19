@@ -7,22 +7,14 @@ export default function Document() {
       <Head>
         <meta
           name="description"
-          content="The Cryptocurrency Miners Community"
+          content="A project to help those damaged by the floods in the great city of Derna."
           key="description"
         />
 
         <meta
           name="keywords"
-          content="GPU Mining, GPU Mining Settings, GPU Mining profitability"
+          content="Derna Libya"
           key="keywords"
-        />
-
-        <meta name="author" content="Mining Chamber" key="author" />
-
-        <meta
-          name="facebook-domain-verification"
-          content="5767tl1jotrkn0xmibskn310vzstql"
-          key="facebook-domain-verification"
         />
 
         <meta
@@ -34,18 +26,6 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
-
-        <Script id="tailwind-dark-mode" strategy="beforeInteractive">
-          {`
-            try {
-              if (localStorage.mcThemePreference === 'dark' || (!('mcThemePreference' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark')
-              } else {
-                document.documentElement.classList.remove('dark')
-              }
-            } catch (_) {}
-          `}
-        </Script>
 
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_ANALYTICS_ID}`}
@@ -62,7 +42,7 @@ export default function Document() {
           `}
         </Script>
       </Head>
-      <body className="bg-glass-light dark:bg-grey-900">
+      <body>
         <Main />
         <NextScript />
       </body>
