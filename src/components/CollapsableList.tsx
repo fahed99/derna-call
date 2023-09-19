@@ -42,7 +42,7 @@ const CollapsableList: FC<Props> = (props) => {
 						transition={{ type: "spring", stiffness: 350, damping: 20 }}
 					>
 						<motion.div
-							className="pt-12 leading-relaxed text-grey-100 text-right rtl"
+							className="pt-12 text-grey-100 text-right rtl"
 							animate={{ y: 0, opacity: 1 }}
 							initial={{ y: 10, opacity: 0 }}
 							exit={{ y: 10, opacity: 0 }}

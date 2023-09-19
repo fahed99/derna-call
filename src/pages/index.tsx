@@ -1,6 +1,6 @@
 import Button from "@components/Button";
 import MainLogo from "@icons/MainLogo";
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
 	return (
@@ -12,9 +12,9 @@ export default function Home() {
 				نهدف إلى تسهيل عملية تقديم او الحصول علي دعم لكل اخوتنا واخواتنا في
 				مدينة درنة الحبيبة
 			</p>
-			<div className="mt-6 cursor-pointer">
+			<Link prefetch={true} href={"/list"} className="mt-6 cursor-pointer">
 				<Button title={"تقديم الدعم"} />
-			</div>
+			</Link>
 			<div className="cursor-pointer">
 				<Button title={"طلب الدعم"} />
 			</div>
