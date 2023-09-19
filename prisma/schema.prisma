@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model AidRequest {
+  id            Int       @id @default(autoincrement())
+  firstName     String?   @map("first_name") @db.VarChar(16)
+  address       String?   @db.VarChar(32)
+  category      String    @db.VarChar(16)
+  description   String    @db.VarChar(255)
+  date_added    DateTime  @default(now())
+  date_resolved DateTime? @default(now())
+  familyMembers Int       @map("family_members")
+  phoneNum1     String    @map("phone_num_1")
+  phoneNum2     String?   @map("phone_num_2")
+  status        String    @default("open") @map("status") @db.VarChar(16)
+  tweet_id      String?
+}

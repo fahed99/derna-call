@@ -6,9 +6,14 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"format": "prettier --write .",
+		"generate:sitemap": "next-sitemap",
+		"docker:build": "docker build --platform linux/amd64 -t gcr.io/builder-349218/dernacall:0.1.0 .",
+		"docker:push": "docker push gcr.io/builder-349218/dernacall:0.1.0"
 	},
 	"dependencies": {
+		"@prisma/client": "^5.3.1",
 		"@tanstack/react-query": "4.12.0",
 		"@types/node": "20.6.2",
 		"@types/react": "18.2.21",
@@ -22,6 +27,7 @@
 		"next-i18next": "^14.0.3",
 		"next-seo": "5.5.0",
 		"postcss": "8.4.29",
+		"prisma": "^5.3.1",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"react-i18next": "^13.2.2",
