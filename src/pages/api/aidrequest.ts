@@ -45,7 +45,7 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	if (req.method === "DELETE") {
-		if (req.query.secret !== process.env.AID_REQUESTS_TOKEN) {
+		if (req.query.secret !== process.env.AID_REQUEST_TOKEN) {
 			return res.status(401).json({ message: "Invalid token" });
 		}
 
@@ -75,7 +75,7 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	if (req.method === "PUT") {
-		if (req.query.secret !== process.env.AID_REQUESTS_TOKEN) {
+		if (req.query.secret !== process.env.AID_REQUEST_TOKEN) {
 			return res.status(401).json({ message: "Invalid token" });
 		}
 
