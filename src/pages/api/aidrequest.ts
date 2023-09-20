@@ -17,7 +17,7 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
 			familyMembers,
 			phoneNum1,
 			phoneNum2,
-			tweet_id,
+			tweetId,
 			status,
 		} = req.body;
 
@@ -27,11 +27,11 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
 				address,
 				category,
 				description,
-				date_added: new Date().toISOString(),
+				dateAdded: new Date().toISOString(),
 				familyMembers,
 				phoneNum1,
 				phoneNum2,
-				tweet_id,
+				tweetId,
 				status,
 			},
 		});
@@ -101,11 +101,11 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
 			category,
 			description,
 			familyMembers,
-			date_added,
-			date_resolved,
+			dateAdded,
+			dateResolved,
 			phoneNum1,
 			phoneNum2,
-			tweet_id,
+			tweetId,
 			status,
 		} = req.body;
 
@@ -119,11 +119,11 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
 				category,
 				description,
 				familyMembers,
-				date_added,
-				date_resolved,
+				dateAdded,
+				dateResolved,
 				phoneNum1,
 				phoneNum2,
-				tweet_id,
+				tweetId,
 				status,
 			},
 		});

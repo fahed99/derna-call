@@ -1,14 +1,14 @@
 export interface AidRequest {
 	id: number;
-	first_name?: string;
+	firstName?: string;
 	address?: string;
 	category: string;
 	description: string;
-	date_added: string;
-	date_resolved?: string;
+	dateAdded: string;
+	dateResolved?: string;
 	familyMembers: number;
 	phoneNum1: number;
 	phoneNum2?: number;
-	tweet_id?: string;
+	tweetId?: string;
 	status: any;
 }
