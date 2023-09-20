@@ -30,6 +30,13 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+COPY --from=blog /app/next.config.js ./
+COPY --from=blog /app/next-i18next.config.js ./
+COPY --from=blog /app/public ./public
+COPY --from=blog /app/package.json ./package.json
+COPY --from=blog --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=blog --chown=nextjs:nodejs /app/.next/static ./.next/static
+
 USER nextjs
 
 EXPOSE 3000
