@@ -8,7 +8,7 @@ const LandingCard: FC<Props> = (props) => {
 	const { title } = props;
 
 	return (
-		<div className="h-[55px] w-[200px] rounded-3xl bg-primary flex justify-center items-center">
+		<div className="h-[55px] shadow-md shadow-grey-50 w-[200px] rounded-3xl bg-primary flex justify-center items-center">
 			<p className="text-white text-xl font-semibold">{title}</p>
 		</div>
 	);
