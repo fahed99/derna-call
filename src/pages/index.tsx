@@ -12,10 +12,10 @@ export default function Home() {
 				نهدف إلى تسهيل عملية تقديم او الحصول علي دعم لكل اخوتنا واخواتنا في
 				مدينة درنة الحبيبة
 			</p>
-			<Link prefetch={true} href={"/list"} className="mt-6 cursor-pointer">
+			<Link prefetch href={"/list"} className="mt-6 cursor-pointer">
 				<Button title={"تقديم الدعم"} />
 			</Link>
-			<Link href={"/success"} className="cursor-pointer">
+			<Link prefetch href={"/submit-request"} className="cursor-pointer">
 				<Button title={"طلب الدعم"} />
 			</Link>
 		</div>

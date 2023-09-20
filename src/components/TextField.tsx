@@ -22,6 +22,7 @@ const TextField: FC<Props> = (props) => {
 			</div>
 			{name === "description" ? (
 				<textarea
+					required={isOptional ? false : true}
 					name={name}
 					// value={value}
 					onChange={onChange}
@@ -30,6 +31,7 @@ const TextField: FC<Props> = (props) => {
 				/>
 			) : (
 				<input
+					required={isOptional ? false : true}
 					type={type}
 					name={name}
 					// value={value}
