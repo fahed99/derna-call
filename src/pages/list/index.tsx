@@ -1,10 +1,11 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import MainLogo from "@icons/MainLogo";
-import CollapsableList from "@components/CollapsableList";
+import ListItem from "@components/ListItem";
+import Popup from "@components/PopUp";
 
 type Props = {
 	requestID?: string;
@@ -12,11 +13,20 @@ type Props = {
 
 const RequestsList: NextPage<Props> = (props: Props) => {
 	const { requestID } = props;
+	const [isOpen, setIsOpen] = useState(false);
+	const [popUpDataID, setPopUpDataID] = useState(1);
+
+	const handleClick = (id: number) => {
+		setPopUpDataID(id);
+		setIsOpen(true);
+	};
 	return (
 		<div className="h-screen flex items-center flex-col gap-4">
 			<div className="w-full flex justify-center">
 				<MainLogo size={230} color="" />
 			</div>
+			<Popup isOpen={isOpen} setIsOpen={setIsOpen} requestID={popUpDataID} />
+
 			<div className="md:w-[55%]">
 				<div className="flex font-semibold tracking-wide text-primary-100 text-lg justify-start text-right items-end flex-row-reverse rtl">
 					<div className="w-[30%]">نوع الطلب</div>
@@ -24,25 +34,28 @@ const RequestsList: NextPage<Props> = (props: Props) => {
 					<div className="w-[20%]">عدد الأفراد</div>
 					<div className="w-[20%]">تاريخ الطلب</div>
 				</div>
-				<CollapsableList
+				<ListItem
+					onClick={() => handleClick(1)}
 					aidType="سكن"
 					address="بنغازي, ليبيا"
 					membersCount={5}
-					date="اليوم"
+					date="قبل ساعة"
 					fullDescription="انا نازح عند واحد ولزني اليوم من الحوش وماعنديش وين نمشي ياريت توفرولي مكان"
 				/>
-				<CollapsableList
+				<ListItem
+					onClick={() => handleClick(2)}
 					aidType="سكن"
 					address="بنغازي, ليبيا"
 					membersCount={5}
-					date="اليوم"
+					date="قبل ساعتين"
 					fullDescription=""
 				/>
-				<CollapsableList
+				<ListItem
+					onClick={() => handleClick(3)}
 					aidType="سكن"
 					address="بنغازي, ليبيا"
 					membersCount={5}
-					date="اليوم"
+					date="قبل 3 ساعات"
 					fullDescription=""
 				/>
 			</div>
