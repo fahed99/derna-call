@@ -21,7 +21,7 @@ const Success: FC<Props> = (props) => {
         تم تقديم طلبك بنجاح
       </div>
       <Link href="/">
-        <Button title={"تم"}></Button>
+        <Button type="primary" title={"تم"}></Button>
       </Link>
     </div>
   );
