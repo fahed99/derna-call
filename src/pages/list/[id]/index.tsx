@@ -5,6 +5,7 @@ import PlanesBackground from "@components/PlanesBackground";
 import ShortLogo from "@icons/ShortLogo";
 import ValuedFields from "@components/ValuedFields";
 import TextField from "@components/TextField";
+import Link from "next/link";
 
 type Props = {
 	requestID: string;
@@ -16,9 +17,9 @@ const Request: NextPage<Props> = (props: Props) => {
 		<>
 			<PlanesBackground />
 			<div className="w-screen h-screen flex flex-col items-center gap-6">
-				<div className="w-full flex justify-center">
+				<Link href={"/"} className="w-full flex justify-center">
 					<ShortLogo size={200} color="" />
-				</div>
+				</Link>
 				<div className="w-full flex justify-center text-3xl font-bold text-grey-100">
 					بيانات أهلنا الغاليين علينا
 				</div>

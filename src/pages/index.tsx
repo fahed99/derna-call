@@ -8,7 +8,7 @@ export default function Home() {
 			<div className="">
 				<MainLogo size={400} color="" />
 			</div>
-			<p className="text-grey-100">
+			<p className="text-grey-100 w-full rtl text-center">
 				نهدف إلى تسهيل عملية تقديم او الحصول علي دعم لكل اخوتنا واخواتنا في
 				مدينة درنة الحبيبة
 			</p>

@@ -6,6 +6,7 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 import MainLogo from "@icons/MainLogo";
 import ListItem from "@components/ListItem";
 import Popup from "@components/PopUp";
+import Link from "next/link";
 
 type Props = {
 	requestID?: string;
@@ -22,12 +23,12 @@ const RequestsList: NextPage<Props> = (props: Props) => {
 	};
 	return (
 		<div className="h-screen flex items-center flex-col gap-4">
-			<div className="w-full flex justify-center">
+			<Link href={"/"} className="w-full flex justify-center">
 				<MainLogo size={230} color="" />
-			</div>
+			</Link>
 			<Popup isOpen={isOpen} setIsOpen={setIsOpen} requestID={popUpDataID} />
 
-			<div className="md:w-[55%]">
+			<div className="w-[85%] flex flex-col gap-0.5 md:w-[55%]">
 				<div className="flex font-semibold tracking-wide text-primary-100 text-lg justify-start text-right items-end flex-row-reverse rtl">
 					<div className="w-[30%]">نوع الطلب</div>
 					<div className="w-[30%]">العنوان</div>

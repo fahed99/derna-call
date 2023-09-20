@@ -15,7 +15,7 @@ const LandingCard: FC<Props> = (props) => {
 					<p className="text-white text-xl font-semibold">{title}</p>
 				</div>
 			) : (
-				<div className="h-[35px] shadow-md shadow-grey-50 w-[140px] rounded-xl bg-primary flex justify-center items-center">
+				<div className="h-[35px] shadow-md shadow-grey-50 w-[100px] rounded-xl bg-primary flex justify-center items-center">
 					<p className="text-white text-xl font-semibold">{title}</p>
 				</div>
 			)}

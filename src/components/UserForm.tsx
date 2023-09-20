@@ -7,6 +7,7 @@ import whiteLogo from "@images/logo-white.png";
 import character from "@images/character.png";
 import Button from "@components/Button";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function UserForm() {
 	const router = useRouter();
@@ -35,16 +36,14 @@ function UserForm() {
 
 	return (
 		<>
-			<div className="w-full md:hidden flex justify-center">
+			<Link href={"/"} className="w-full md:hidden flex justify-center">
 				<ShortLogo size={200} color="" />
-			</div>
+			</Link>
 			<div className="w-screen h-screen flex justify-center">
 				<div className="hidden md:flex w-[40%] h-full bg-primary flex-col items-center py-14 gap-8">
-					<Image
-						src={whiteLogo}
-						alt="logo"
-						className="w-[60%] lg:w-[50%] xl:w-[35%]"
-					/>
+					<Link className="w-[60%] lg:w-[50%] xl:w-[35%]" href={"/"}>
+						<Image src={whiteLogo} alt="logo" />
+					</Link>
 					<Image
 						src={character}
 						alt="character"
