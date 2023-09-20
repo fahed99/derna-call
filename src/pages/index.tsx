@@ -13,10 +13,10 @@ export default function Home() {
 				مدينة درنة الحبيبة
 			</p>
 			<Link prefetch href={"/list"} className="mt-6 cursor-pointer">
-				<Button title={"تقديم الدعم"} />
+				<Button type="primary" title={"تقديم الدعم"} />
 			</Link>
 			<Link prefetch href={"/submit-request"} className="cursor-pointer">
-				<Button title={"طلب الدعم"} />
+				<Button type="primary" title={"طلب الدعم"} />
 			</Link>
 		</div>
 	);
