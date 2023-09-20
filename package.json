@@ -23,7 +23,7 @@
 		"eslint-config-next": "13.4.19",
 		"framer-motion": "7.3.6",
 		"i18next": "^23.5.1",
-		"next": "13.4.19",
+		"next": "^13.5.1",
 		"next-i18next": "^14.0.3",
 		"next-seo": "5.5.0",
 		"postcss": "8.4.29",

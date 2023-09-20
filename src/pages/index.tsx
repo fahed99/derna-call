@@ -15,9 +15,9 @@ export default function Home() {
 			<Link prefetch={true} href={"/list"} className="mt-6 cursor-pointer">
 				<Button title={"تقديم الدعم"} />
 			</Link>
-			<div className="cursor-pointer">
+			<Link href={"/success"} className="cursor-pointer">
 				<Button title={"طلب الدعم"} />
-			</div>
+			</Link>
 		</div>
 	);
 }
