@@ -9,21 +9,19 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Generate Prisma Client
-RUN yarn prisma generate
-
-# Run Prisma migrations to initialize the database schema
-RUN yarn prisma migrate deploy
-
 # Disable anonymous telemetry
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN yarn build
+# Generate Prisma Client
+RUN yarn prisma generate
 
-RUN yarn generate:sitemap
+RUN yarn build
 
 FROM node:16-alpine AS runner
 WORKDIR /app
+
+# Ensure you copy node_modules
+# COPY --from=blog /app/node_modules ./node_modules
 
 ENV NODE_ENV production
 
@@ -36,6 +34,7 @@ COPY --from=blog /app/public ./public
 COPY --from=blog /app/package.json ./package.json
 COPY --from=blog --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=blog --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=blog /app/prisma ./prisma
 
 USER nextjs
 
