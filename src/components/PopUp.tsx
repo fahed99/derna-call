@@ -79,6 +79,16 @@ const Popup: FC<Props> = (props: Props) => {
               </div>
               <div className="w-fit flex flex-col gap-2">
                 <div className="font-semibold text-grey-100 text-lg">
+                  التاريخ
+                </div>
+                <div className="font-medium text-grey-100 text-md pr-1">
+                  قبل ساعتين
+                </div>
+              </div>
+            </div>
+            <div className="h-fit w-full md:px-10 pt-10 flex text-right gap-[10%] md:gap-[25%] flex-row-reverse">
+              <div className="w-fit flex flex-col gap-2">
+                <div className="font-semibold text-grey-100 text-lg">
                   العنوان
                 </div>
                 <div className="font-medium text-grey-100 text-md pr-1">

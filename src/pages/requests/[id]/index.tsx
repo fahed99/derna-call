@@ -7,6 +7,7 @@ import TextField from '@components/TextField';
 import Link from 'next/link';
 import Image from 'next/image';
 import MainLogo from '@images/main-logo.png';
+import Button from '@components/Button';
 
 type Props = {
   requestID: string;
@@ -27,18 +28,26 @@ const Request: NextPage<Props> = (props: Props) => {
         <div className="w-full flex justify-center text-3xl font-bold text-grey-100">
           بيانات أهلنا الغاليين علينا
         </div>
-        <div className="flex w-[45%] justify-center">
-          <div className="h-[530px] font-semibold text-xl w-full shadow-lg shadow-grey-50 rounded-xl py-20 px-14 flex flex-col gap-6">
+        <div className="flex h-fit w-[70%] md:w-[50%] lg:w-[40%] xl:w-[30%] xxl:w-[20%] justify-center">
+          <div className="font-semibold text-xl w-full shadow-lg shadow-grey-50 rounded-xl py-12 px-10 xl:px-20 flex flex-col gap-6">
             <ValuedFields field={'رقم الطلب'} value={requestID} />
             <ValuedFields field={'الاسم'} value={'فهد'} />
             <ValuedFields field={'الطلب'} value={'غذاء'} />
+            <ValuedFields field={'النوع'} value={'سكن'} />
+            <ValuedFields field={'التاريخ'} value={'31/01/2010'} />
+            <ValuedFields field={'رقم التلفون'} value={'09134523452'} />
             <ValuedFields
               field={'وصف الطلب'}
               value={'الدعم الي يدزولنا فيه مايوصلش فينا را'}
             />
-            <ValuedFields field={'النوع'} value={'سكن'} />
-            <ValuedFields field={'التاريخ'} value={'31/01/2010'} />
-            <ValuedFields field={'رقم التلفون'} value={'09134523452'} />
+            <div className="w-full flex justify-center gap-8 items-center pt-2">
+              <Link href={'/requests/1'}>
+                <Button type="primary" title="تم المساعده" />
+              </Link>
+              <Link href={'/requests/1'}>
+                <div className="text-red-700 max-w-full text-right">متمش</div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
