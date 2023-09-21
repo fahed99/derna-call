@@ -14,16 +14,17 @@ type Props = {
 };
 
 const RequestsList: NextPage<Props> = (props: Props) => {
-  const { requestID } = props;
+  // const { requestID } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const [popUpDataID, setPopUpDataID] = useState(1);
-  const { data: requestAids } = useRequests();
-  console.log(requestAids);
+  // const [popUpDataID, setPopUpDataID] = useState(1);
+  const { data: requestAids, isLoading, isError } = useRequests();
+  const [selectedRequestData, setSelectedRequestData] = useState(null);
 
-  const handleClick = (id: number) => {
-    setPopUpDataID(id);
+  const handleClick = (request) => {
+    setSelectedRequestData(request);
     setIsOpen(true);
   };
+
   return (
     <div className="h-screen flex items-center flex-col gap-4">
       <Link
@@ -31,7 +32,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
         className="w-[240px] md:w-[25%] lg:w-[20%] flex justify-center">
         <Image priority src={MainLogo} alt="Logo" />
       </Link>
-      <Popup isOpen={isOpen} setIsOpen={setIsOpen} requestID={popUpDataID} />
+      <Popup isOpen={isOpen} setIsOpen={setIsOpen} requestData={selectedRequestData} />
 
       <div className="w-[85%] flex flex-col gap-0.5 md:w-[75%] lg:w-[65%]">
         <div className="flex font-semibold md:pl-12 tracking-wide text-primary-100 text-lg justify-start text-right items-end flex-row-reverse rtl">
@@ -40,30 +41,23 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           <div className="w-[20%]">عدد الأفراد</div>
           <div className="w-[20%]">تاريخ الطلب</div>
         </div>
-        <ListItem
-          onClick={() => handleClick(1)}
-          aidType="سكن"
-          address="بنغازي, ليبيا"
-          membersCount={5}
-          date="قبل ساعة"
-          fullDescription="انا نازح عند واحد ولزني اليوم من الحوش وماعنديش وين نمشي ياريت توفرولي مكان"
-        />
-        <ListItem
-          onClick={() => handleClick(2)}
-          aidType="سكن"
-          address="بنغازي, ليبيا"
-          membersCount={5}
-          date="قبل ساعتين"
-          fullDescription=""
-        />
-        <ListItem
-          onClick={() => handleClick(3)}
-          aidType="سكن"
-          address="بنغازي, ليبيا"
-          membersCount={5}
-          date="قبل 3 ساعات"
-          fullDescription=""
-        />
+
+        {/* {isLoading && <p>Loading...</p>} */}
+
+        {/* {isError && <p>Error loading data.</p>}  */}
+
+        {requestAids && !isLoading && !isError && requestAids.map((request) => (
+          <ListItem
+            key={request.id}
+            id={request.id}
+            onClick={() => handleClick(request)}
+            aidType={request.category}
+            address={request.address}
+            membersCount={request.familyMembers}
+            date={request.dateAdded}
+            fullDescription={request.description}
+          />
+        ))}
       </div>
     </div>
   );

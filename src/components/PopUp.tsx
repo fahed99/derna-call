@@ -11,15 +11,16 @@ import Image from 'next/image';
 import close from '@images/cancel.png';
 import Link from 'next/link';
 import Button from './Button';
+import { AidRequest } from '@customTypes/AidRequest';
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  requestID: number;
+  requestData: AidRequest;
 }
 
 const Popup: FC<Props> = (props: Props) => {
-  const { isOpen, setIsOpen, requestID } = props;
+  const { isOpen, setIsOpen, requestData } = props;
 
   const handleParentClick = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -74,7 +75,7 @@ const Popup: FC<Props> = (props: Props) => {
                   نوع الطلب
                 </div>
                 <div className="font-medium text-grey-100 text-md pr-1">
-                  سكن
+                  {requestData.category}
                 </div>
               </div>
               <div className="w-fit flex flex-col gap-2">
@@ -82,7 +83,7 @@ const Popup: FC<Props> = (props: Props) => {
                   التاريخ
                 </div>
                 <div className="font-medium text-grey-100 text-md pr-1">
-                  قبل ساعتين
+                  {requestData.dateAdded}
                 </div>
               </div>
             </div>
@@ -92,24 +93,28 @@ const Popup: FC<Props> = (props: Props) => {
                   العنوان
                 </div>
                 <div className="font-medium text-grey-100 text-md pr-1">
-                  الفويهات, بنغازي
+                  {requestData.address} 
                 </div>
               </div>
               <div className="w-fit flex flex-col gap-2">
                 <div className="font-semibold text-grey-100 text-lg">
                   عدد الأفراد
                 </div>
-                <div className="font-medium text-grey-100 text-md pr-1">5</div>
+                <div className="font-semibold text-grey-100 text-lg">
+                  {requestData.familyMembers}  
+                </div>
               </div>
             </div>
             <div className="w-full flex text-right flex-col items-end gap-2 md:px-10">
               <div className="font-semibold text-grey-100 text-lg">
                 وصف الطلب
               </div>
-              <div className="font-medium text-grey-100 text-md pr-1">سكن</div>
+              <div className="font-medium text-grey-100 text-md pr-1">
+                {requestData.description} 
+              </div>
             </div>
             <div className="pt-6 w-full flex justify-center">
-              <Link href={'/1'}>
+              <Link href={'/requests/' + requestData.id}>
                 <Button type="primary" title="تقديم الدعم الآن" />
               </Link>
             </div>

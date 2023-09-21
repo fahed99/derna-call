@@ -40,6 +40,24 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (req.method === 'GET') {
+    const { id } = req.query;
+
+    // Check if an ID was provided in the query
+    if (id) {
+      const aidRequest = await prisma.aidRequest.findFirst({
+        where: {
+          id: Number(id),
+        },
+      });
+
+      if (!aidRequest) {
+        return res.status(404).json({ message: 'Aid Request not found' });
+      }
+
+      return res.status(200).json(aidRequest);
+    }
+
+    // If no ID provided, return all aidRequests
     const aidRequests = await prisma.aidRequest.findMany();
     return res.status(200).json(aidRequests);
   }

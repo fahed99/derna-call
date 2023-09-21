@@ -2,15 +2,16 @@ import { FC, MouseEventHandler } from 'react';
 import Button from './Button';
 
 interface Props {
+  id: number;
   aidType: string;
-  address: string;
+  address?: string;
   membersCount: number;
   date: string;
   fullDescription: string;
   onClick: MouseEventHandler<HTMLDivElement>;
 }
 const ListItem: FC<Props> = (props) => {
-  const { aidType, address, membersCount, date, fullDescription, onClick } =
+  const { aidType, address, membersCount, date, onClick } =
     props;
 
   return (
