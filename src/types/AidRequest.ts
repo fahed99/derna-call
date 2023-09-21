@@ -10,5 +10,5 @@ export interface AidRequest {
 	phoneNum1: number;
 	phoneNum2?: number;
 	tweetId?: string;
-	status: any;
+	status: 'open' | 'closed' | 'in-progress' | 'resolved';
 }
