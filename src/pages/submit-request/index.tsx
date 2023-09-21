@@ -1,9 +1,9 @@
-import { GetStaticProps, NextPage } from "next";
-import { QueryClient, dehydrate } from "@tanstack/react-query";
-import UserForm from "@components/UserForm";
+import { GetStaticProps, NextPage } from 'next';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
+import UserForm from '@components/UserForm';
 
 const SubmitRequest: NextPage = () => {
-	return <UserForm />;
+  return <UserForm />;
 };
 export default SubmitRequest;
 

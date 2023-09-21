@@ -7,8 +7,8 @@ export interface AidRequest {
 	dateAdded: string;
 	dateResolved?: string;
 	familyMembers: number;
-	phoneNum1: number;
-	phoneNum2?: number;
+	phoneNum1: string;
+	phoneNum2?: string;
 	tweetId?: string;
 	status: 'open' | 'closed' | 'in-progress' | 'resolved';
 }
