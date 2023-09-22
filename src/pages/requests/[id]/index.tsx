@@ -28,6 +28,7 @@ const Request: NextPage<Props> = (props: Props) => {
     setError(null);
 
     try {
+      console.log(id)
       const response = await fetch(`https://dernacall.ly/api/aidrequest?id=${id}`, {
         method: 'PATCH', // Assuming PATCH method for updates
         headers: {
@@ -47,7 +48,7 @@ const Request: NextPage<Props> = (props: Props) => {
       const responseData = await response.json();
 
       // Optionally navigate to another page or show a success message
-      router.push(`/success/${id}`);
+      router.push(`/success`);
 
     } catch (err: any) {
       setError(err.message);

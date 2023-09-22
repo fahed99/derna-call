@@ -4,6 +4,11 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
+	// Set the CORS headers
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Note: In production, replace '*' with your actual origin like 'http://localhost:3000'
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
+	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
   if (req.method === 'POST') {
     if (req.query.secret !== process.env.AID_REQUEST_TOKEN) {
       return res.status(401).json({ message: 'Invalid token' });
