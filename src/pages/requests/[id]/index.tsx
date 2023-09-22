@@ -3,12 +3,11 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import PlanesBackground from '@components/PlanesBackground';
 import ValuedFields from '@components/ValuedFields';
-import TextField from '@components/TextField';
 import Link from 'next/link';
 import Image from 'next/image';
 import MainLogo from '@images/main-logo.png';
 import Button from '@components/Button';
-import { getRequestByID } from '@hooks/useRequests'; // Import our hook function
+import { getRequestByID } from '@hooks/getRequests'; // Import our hook function
 import { AidRequest } from '@customTypes/AidRequest'; // Assuming you have this type defined
 
 type Props = {
@@ -49,7 +48,7 @@ const Request: NextPage<Props> = (props: Props) => {
             }
             <ValuedFields field={'وصف'} value={requestData.description} />
             <div className="w-full flex justify-center gap-8 items-center pt-2">
-              
+
               {/* // Add action buttons api calls  */}
               <Link href={'/requests/1'}> 
                 <Button type="primary" title="تم المساعده" />
@@ -64,34 +63,17 @@ const Request: NextPage<Props> = (props: Props) => {
     </>
   );
 };
+
 export default Request;
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const requestID = params!.id as string;
-
-  const queryClient = new QueryClient();
-
-  if (!requestID) {
-    return {
-      redirect: {
-        destination: '/404',
-        permanent: false
-      }
-    };
-  }
-
-  // await queryClient.prefetchQuery(["settings", gpuName], () =>
-  // 	fetchSettings(gpuName)
-  // );
+  const requestData = await getRequestByID(requestID);
 
   return {
     props: {
-      requestID,
-      dehydratedState: dehydrate(queryClient),
-      ...(await serverSideTranslations(locale as string, [
-        'request',
-        'landing'
-      ]))
+      requestData,
+      ...(await serverSideTranslations(locale as string, ['request', 'landing']))
     },
     revalidate: 43200
   };

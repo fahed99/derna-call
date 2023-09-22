@@ -13,7 +13,7 @@ export default function Home() {
         نهدف إلى تسهيل عملية تقديم او الحصول علي دعم لكل اخوتنا واخواتنا في
         مدينة درنة الحبيبة
       </p>
-      <Link prefetch href={'/list'} className="mt-6 cursor-pointer">
+      <Link prefetch href={'/requests'} className="mt-6 cursor-pointer">
         <Button type="primary" title={'تقديم الدعم'} />
       </Link>
       <Link prefetch href={'/submit-request'} className="cursor-pointer">

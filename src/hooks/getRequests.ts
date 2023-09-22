@@ -11,7 +11,7 @@ const getRequests = async (): Promise<AidRequest[]> => {
 };
 
 const getRequestByID = async (requestID: string): Promise<AidRequest> => {
-  return await fetch(`https://dernacall.ly/api/aidrequest/${requestID}`, {
+  return await fetch(`https://dernacall.ly/api/aidrequest?id=${requestID}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'

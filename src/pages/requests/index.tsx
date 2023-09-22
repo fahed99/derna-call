@@ -8,6 +8,7 @@ import Popup from '@components/PopUp';
 import Link from 'next/link';
 import MainLogo from '@images/main-logo.png';
 import { getRequests, useRequests } from '@hooks/getRequests';
+import { AidRequest } from '@customTypes/AidRequest';
 
 type Props = {
   requestID?: string;
@@ -18,9 +19,10 @@ const RequestsList: NextPage<Props> = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   // const [popUpDataID, setPopUpDataID] = useState(1);
   const { data: requestAids, isLoading, isError } = useRequests();
-  const [selectedRequestData, setSelectedRequestData] = useState(null);
+  const [selectedRequestData, setSelectedRequestData] = useState<AidRequest | null>(null);
 
-  const handleClick = (request) => {
+
+  const handleClick = (request: AidRequest) => {
     setSelectedRequestData(request);
     setIsOpen(true);
   };
@@ -32,7 +34,10 @@ const RequestsList: NextPage<Props> = (props: Props) => {
         className="w-[240px] md:w-[25%] lg:w-[20%] flex justify-center">
         <Image priority src={MainLogo} alt="Logo" />
       </Link>
-      <Popup isOpen={isOpen} setIsOpen={setIsOpen} requestData={selectedRequestData} />
+      {
+        selectedRequestData && 
+        <Popup isOpen={isOpen} setIsOpen={setIsOpen} requestData={selectedRequestData} />
+      }
 
       <div className="w-[85%] flex flex-col gap-0.5 md:w-[75%] lg:w-[65%]">
         <div className="flex font-semibold md:pl-12 tracking-wide text-primary-100 text-lg justify-start text-right items-end flex-row-reverse rtl">

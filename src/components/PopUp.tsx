@@ -16,7 +16,7 @@ import { AidRequest } from '@customTypes/AidRequest';
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  requestData: AidRequest;
+  requestData?: AidRequest;
 }
 
 const Popup: FC<Props> = (props: Props) => {
@@ -67,57 +67,61 @@ const Popup: FC<Props> = (props: Props) => {
                 width={32}
                 src={close}
                 alt="close"
-              />
+              />  
             </div>
-            <div className="h-fit w-full md:px-10 pt-10 flex text-right gap-[10%] md:gap-[25%] flex-row-reverse">
-              <div className="w-fit flex flex-col gap-2">
-                <div className="font-semibold text-grey-100 text-lg">
-                  نوع الطلب
+            {requestData && (
+              <>
+                <div className="h-fit w-full md:px-10 pt-10 flex text-right gap-[10%] md:gap-[25%] flex-row-reverse">
+                  <div className="w-fit flex flex-col gap-2">
+                    <div className="font-semibold text-grey-100 text-lg">
+                      نوع الطلب
+                    </div>
+                    <div className="font-medium text-grey-100 text-md pr-1">
+                      {requestData.category}
+                    </div>
+                  </div>
+                  <div className="w-fit flex flex-col gap-2">
+                    <div className="font-semibold text-grey-100 text-lg">
+                      التاريخ
+                    </div>
+                    <div className="font-medium text-grey-100 text-md pr-1">
+                      {requestData.dateAdded}
+                    </div>
+                  </div>
                 </div>
-                <div className="font-medium text-grey-100 text-md pr-1">
-                  {requestData.category}
+                <div className="h-fit w-full md:px-10 pt-10 flex text-right gap-[10%] md:gap-[25%] flex-row-reverse">
+                  <div className="w-fit flex flex-col gap-2">
+                    <div className="font-semibold text-grey-100 text-lg">
+                      العنوان
+                    </div>
+                    <div className="font-medium text-grey-100 text-md pr-1">
+                      {requestData.address} 
+                    </div>
+                  </div>
+                  <div className="w-fit flex flex-col gap-2">
+                    <div className="font-semibold text-grey-100 text-lg">
+                      عدد الأفراد
+                    </div>
+                    <div className="font-semibold text-grey-100 text-lg">
+                      {requestData.familyMembers}  
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="w-fit flex flex-col gap-2">
-                <div className="font-semibold text-grey-100 text-lg">
-                  التاريخ
+                <div className="w-full flex text-right flex-col items-end gap-2 md:px-10">
+                  <div className="font-semibold text-grey-100 text-lg">
+                    وصف الطلب
+                  </div>
+                  <div className="font-medium text-grey-100 text-md pr-1">
+                    {requestData.description} 
+                  </div>
                 </div>
-                <div className="font-medium text-grey-100 text-md pr-1">
-                  {requestData.dateAdded}
+                <div className="pt-6 w-full flex justify-center">
+                  <Link href={'/requests/' + requestData.id}>
+                    <Button type="primary" title="تقديم الدعم الآن" />
+                  </Link>
                 </div>
-              </div>
-            </div>
-            <div className="h-fit w-full md:px-10 pt-10 flex text-right gap-[10%] md:gap-[25%] flex-row-reverse">
-              <div className="w-fit flex flex-col gap-2">
-                <div className="font-semibold text-grey-100 text-lg">
-                  العنوان
-                </div>
-                <div className="font-medium text-grey-100 text-md pr-1">
-                  {requestData.address} 
-                </div>
-              </div>
-              <div className="w-fit flex flex-col gap-2">
-                <div className="font-semibold text-grey-100 text-lg">
-                  عدد الأفراد
-                </div>
-                <div className="font-semibold text-grey-100 text-lg">
-                  {requestData.familyMembers}  
-                </div>
-              </div>
-            </div>
-            <div className="w-full flex text-right flex-col items-end gap-2 md:px-10">
-              <div className="font-semibold text-grey-100 text-lg">
-                وصف الطلب
-              </div>
-              <div className="font-medium text-grey-100 text-md pr-1">
-                {requestData.description} 
-              </div>
-            </div>
-            <div className="pt-6 w-full flex justify-center">
-              <Link href={'/requests/' + requestData.id}>
-                <Button type="primary" title="تقديم الدعم الآن" />
-              </Link>
-            </div>
+              </>
+            )}
           </motion.div>
         </motion.div>
       )}
