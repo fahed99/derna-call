@@ -16,7 +16,7 @@ export default function Home() {
       <Link prefetch href={'/requests'} className="mt-6 cursor-pointer">
         <Button type="primary" title={'تقديم الدعم'} />
       </Link>
-      <Link prefetch href={'/submit-request'} className="cursor-pointer">
+      <Link prefetch href={'/submit'} className="cursor-pointer">
         <Button type="primary" title={'طلب الدعم'} />
       </Link>
     </div>
