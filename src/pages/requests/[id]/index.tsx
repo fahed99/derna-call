@@ -7,8 +7,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import MainLogo from '@images/main-logo.png';
 import Button from '@components/Button';
-import { getRequestByID } from '@hooks/getRequests'; // Import our hook function
-import { AidRequest } from '@customTypes/AidRequest'; // Assuming you have this type defined
+import { getRequestByID } from '@hooks/getRequestByID';
+import { AidRequest } from '@customTypes/AidRequest';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -21,7 +21,7 @@ const Request: NextPage<Props> = (props: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const router = useRouter();
-  const { id } = router.query; // Assuming you're using Next.js dynamic routes
+  const { id } = router.query;
 
   const handleComplete = async () => {
     setIsLoading(true);
@@ -31,10 +31,9 @@ const Request: NextPage<Props> = (props: Props) => {
       const response = await fetch(
         `https://dernacall.ly/api/aidrequest?id=${id}`,
         {
-          method: 'PATCH', // Assuming PATCH method for updates
+          method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
-            // ... (any other headers required, e.g. authorization)
           },
           body: JSON.stringify({
             status: 'pending'
@@ -45,7 +44,6 @@ const Request: NextPage<Props> = (props: Props) => {
       if (!response.ok) {
         throw new Error('Failed to update the status');
       }
-      // Optionally navigate to another page or show a success message
       router.push(`accomplished`);
     } catch (err: any) {
       setError(err.message);
@@ -112,11 +110,22 @@ export default Request;
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const requestID = params!.id as string;
-  const requestData = await getRequestByID(requestID);
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60000,
+        cacheTime: 60000
+      }
+    }
+  });
+
+  await queryClient.prefetchQuery(['aidRequest', requestID], () =>
+    getRequestByID(requestID)
+  );
 
   return {
     props: {
-      requestData,
+      dehydratedState: dehydrate(queryClient),
       ...(await serverSideTranslations(locale as string, [
         'request',
         'landing'
