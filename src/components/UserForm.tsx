@@ -1,4 +1,3 @@
-// components/UserForm.js
 import TextField from '@components/TextField';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -12,14 +11,55 @@ import MainLogo from '@images/main-logo.png';
 function UserForm() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
     address: '',
-    phone: ''
+    category: '',
+    description: '',
+    familyMembers: 0,
+    phoneNum1: '',
+    phoneNum2: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
+  console.log(formData);
 
-  const handleInputChange = (e: { target: { name: any; value: any } }) => {
+  const [error, setError] = useState(null);
+
+  const handleComplete = async () => {
+    console.log(formData);
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`https://dernacall.ly/api/aidrequest`, {
+        method: 'POST', // Assuming PATCH method for updates
+        headers: {
+          'Content-Type': 'application/json'
+          // ... (any other headers required, e.g. authorization)
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update the status');
+      }
+      // Optionally navigate to another page or show a success message
+      router.push(`success`);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleInputChange = (e: {
+    target: { name: any; value: number | string };
+  }) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name !== 'familyMembers') {
+      setFormData({ ...formData, [name]: value });
+    } else {
+      setFormData({ ...formData, [name]: Number(value) });
+    }
   };
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -30,7 +70,6 @@ function UserForm() {
     // await prisma.user.create({ data: formData });
 
     // Reset the form after submission
-    setFormData({ name: '', address: '', phone: '' });
     router.push('/success');
   };
 
@@ -67,7 +106,7 @@ function UserForm() {
                   label="الإسم"
                   type="text"
                   name="firstName"
-                  value={formData.address}
+                  value={formData.firstName}
                   onChange={handleInputChange}
                 />
               </div>
@@ -76,7 +115,7 @@ function UserForm() {
                   label="عدد الأفراد"
                   type="text"
                   name="familyMembers"
-                  value={formData.address}
+                  value={formData.familyMembers}
                   onChange={handleInputChange}
                 />
               </div>
@@ -93,14 +132,14 @@ function UserForm() {
               label="نوع الطلب"
               type="text"
               name="category"
-              value={formData.address}
+              value={formData.category}
               onChange={handleInputChange}
             />
             <TextField
               label="وصف الطلب"
               type="text"
               name="description"
-              value={formData.address}
+              value={formData.description}
               onChange={handleInputChange}
             />
             <div className="w-full flex flex-row-reverse gap-10">
@@ -109,7 +148,7 @@ function UserForm() {
                   label="رقم الهاتف"
                   type="text"
                   name="phoneNum1"
-                  value={formData.address}
+                  value={formData.phoneNum1}
                   onChange={handleInputChange}
                 />
               </div>
@@ -119,13 +158,16 @@ function UserForm() {
                   label="رقم الهاتف 2"
                   type="text"
                   name="phoneNum2"
-                  value={formData.address}
+                  value={formData.phoneNum2}
                   onChange={handleInputChange}
                 />
               </div>
             </div>
             <div className="w-full py-4 flex justify-center">
-              <button type="submit">
+              <button
+                type="submit"
+                onClick={handleComplete}
+                disabled={isLoading}>
                 <Button type="primary" title="تأكيد الطلب" />
               </button>
             </div>

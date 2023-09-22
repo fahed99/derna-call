@@ -28,27 +28,25 @@ const Request: NextPage<Props> = (props: Props) => {
     setError(null);
 
     try {
-      const response = await fetch(`https://dernacall.ly/api/aidrequest?id=${id}`, {
-        method: 'PATCH', // Assuming PATCH method for updates
-        headers: {
-          'Content-Type': 'application/json',
-          // ... (any other headers required, e.g. authorization)
-        },
-        body: JSON.stringify({
-          status: 'pending'
-        })
-      });
+      const response = await fetch(
+        `https://dernacall.ly/api/aidrequest?id=${id}`,
+        {
+          method: 'PATCH', // Assuming PATCH method for updates
+          headers: {
+            'Content-Type': 'application/json'
+            // ... (any other headers required, e.g. authorization)
+          },
+          body: JSON.stringify({
+            status: 'pending'
+          })
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to update the status');
       }
-
-      // Process the response if needed
-      const responseData = await response.json();
-
       // Optionally navigate to another page or show a success message
-      router.push(`/success`);
-
+      router.push(`accomplished`);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -71,21 +69,27 @@ const Request: NextPage<Props> = (props: Props) => {
         </div>
         <div className="flex h-fit w-[70%] md:w-[50%] lg:w-[40%] xl:w-[30%] xxl:w-[20%] justify-center">
           <div className="font-semibold text-xl w-full shadow-lg shadow-grey-50 rounded-xl py-12 px-10 flex flex-col gap-6">
-            <ValuedFields field={'رقم الطلب'} value={requestData.id.toString()} />
-            
-            {requestData.firstName && 
+            <ValuedFields
+              field={'رقم الطلب'}
+              value={requestData.id.toString()}
+            />
+
+            {requestData.firstName && (
               <ValuedFields field={'الاسم'} value={requestData.firstName} />
-            }
+            )}
             <ValuedFields field={'التاريخ'} value={requestData.dateAdded} />
 
             <ValuedFields field={'نوع الطلب'} value={requestData.category} />
-            {requestData.address && 
+            {requestData.address && (
               <ValuedFields field={'العنوان'} value={requestData.address} />
-            }
+            )}
             <ValuedFields field={'رقم التلفون'} value={requestData.phoneNum1} />
-            {requestData.phoneNum2 && 
-              <ValuedFields field={'(2) رقم التلفون'} value={requestData.phoneNum1} />
-            }
+            {requestData.phoneNum2 && (
+              <ValuedFields
+                field={'(2) رقم التلفون'}
+                value={requestData.phoneNum1}
+              />
+            )}
             <ValuedFields field={'وصف الطلب'} value={requestData.description} />
             <div className="w-full flex justify-center gap-8 items-center pt-2">
               <button onClick={handleComplete} disabled={isLoading}>
@@ -96,7 +100,7 @@ const Request: NextPage<Props> = (props: Props) => {
               </Link>
             </div>
             {/* Show error message if any */}
-            {error && <div className="text-red-500">{error}</div>}
+            {error ? <div className="text-red-500">{error}</div> : undefined}
           </div>
         </div>
       </div>
@@ -113,7 +117,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   return {
     props: {
       requestData,
-      ...(await serverSideTranslations(locale as string, ['request', 'landing']))
+      ...(await serverSideTranslations(locale as string, [
+        'request',
+        'landing'
+      ]))
     },
     revalidate: 43200
   };

@@ -1,7 +1,7 @@
-import { FC } from "react";
-import SuccessLogo from "@icons/SuccessLogo";
-import Button from "./Button";
-import Link from "next/link";
+import { FC } from 'react';
+import SuccessLogo from '@icons/SuccessLogo';
+import Button from './Button';
+import Link from 'next/link';
 
 interface Props {}
 
@@ -13,7 +13,7 @@ const Success: FC<Props> = (props) => {
       <div className="flex justify-center items-center -space-x-[190px]">
         <div className="rounded-full bg-primary bg-opacity-10  w-60 h-60 "></div>
         <div className="relative pr-10 z-10">
-          <SuccessLogo size={140} color={"stroke-white fill-primary"} />
+          <SuccessLogo size={140} color={'stroke-white fill-primary'} />
         </div>
       </div>
       <div className="text-6xl text-primary font-semibold">! شكرا لك </div>
@@ -21,7 +21,7 @@ const Success: FC<Props> = (props) => {
         تم تقديم طلبك بنجاح
       </div>
       <Link href="/">
-        <Button type="primary" title={"تم"}></Button>
+        <Button type="primary" title={'تم'}></Button>
       </Link>
     </div>
   );

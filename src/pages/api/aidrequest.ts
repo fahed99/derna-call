@@ -4,15 +4,22 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
-	// Set the CORS headers
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Note: In production, replace '*' with your actual origin like 'http://localhost:3000'
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
-	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  // Set the CORS headers
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // Note: In production, replace '*' with your actual origin like 'http://localhost:3000'
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+  );
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    // Handle the preflight (OPTIONS) request
+    return res.status(200).end();
+  }
 
   if (req.method === 'POST') {
-    if (req.query.secret !== process.env.AID_REQUEST_TOKEN) {
-      return res.status(401).json({ message: 'Invalid token' });
-    }
+    // if (req.query.secret !== process.env.AID_REQUEST_TOKEN) {
+    //   return res.status(401).json({ message: 'Invalid token' });
+    // }
 
     const {
       firstName,
@@ -51,8 +58,8 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
     if (id) {
       const aidRequest = await prisma.aidRequest.findFirst({
         where: {
-          id: Number(id),
-        },
+          id: Number(id)
+        }
       });
 
       if (!aidRequest) {
@@ -155,9 +162,9 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (req.method === 'PATCH') {
-    if (req.query.secret !== process.env.AID_REQUEST_TOKEN) {
-      return res.status(401).json({ message: 'Invalid token' });
-    }
+    // if (req.query.secret !== process.env.AID_REQUEST_TOKEN) {
+    //   return res.status(401).json({ message: 'Invalid token' });
+    // }
 
     const { id } = req.query;
 
