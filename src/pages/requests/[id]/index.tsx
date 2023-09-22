@@ -9,6 +9,8 @@ import MainLogo from '@images/main-logo.png';
 import Button from '@components/Button';
 import { getRequestByID } from '@hooks/getRequests'; // Import our hook function
 import { AidRequest } from '@customTypes/AidRequest'; // Assuming you have this type defined
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 type Props = {
   requestData: AidRequest;
@@ -16,6 +18,44 @@ type Props = {
 
 const Request: NextPage<Props> = (props: Props) => {
   const { requestData } = props;
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const router = useRouter();
+  const { id } = router.query; // Assuming you're using Next.js dynamic routes
+
+  const handleComplete = async () => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`https://dernacall.ly/api/aidrequest?id=${id}`, {
+        method: 'PATCH', // Assuming PATCH method for updates
+        headers: {
+          'Content-Type': 'application/json',
+          // ... (any other headers required, e.g. authorization)
+        },
+        body: JSON.stringify({
+          status: 'pending'
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update the status');
+      }
+
+      // Process the response if needed
+      const responseData = await response.json();
+
+      // Optionally navigate to another page or show a success message
+      router.push(`/success/${id}`);
+
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <PlanesBackground />
@@ -48,15 +88,15 @@ const Request: NextPage<Props> = (props: Props) => {
             }
             <ValuedFields field={'وصف'} value={requestData.description} />
             <div className="w-full flex justify-center gap-8 items-center pt-2">
-
-              {/* // Add action buttons api calls  */}
-              <Link href={'/requests/1'}> 
+              <button onClick={handleComplete} disabled={isLoading}>
                 <Button type="primary" title="تم المساعده" />
-              </Link>
-              <Link href={'/requests/1'}>
+              </button>
+              <Link href={'/requests'}>
                 <div className="text-red-700 max-w-full text-right">متمش</div>
               </Link>
             </div>
+            {/* Show error message if any */}
+            {error && <div className="text-red-500">{error}</div>}
           </div>
         </div>
       </div>

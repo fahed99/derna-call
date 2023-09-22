@@ -149,6 +149,39 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.json(aidRequest);
   }
 
+  if (req.method === 'PATCH') {
+    if (req.query.secret !== process.env.AID_REQUEST_TOKEN) {
+      return res.status(401).json({ message: 'Invalid token' });
+    }
+
+    const { id } = req.query;
+
+    if (!id) {
+      return res.status(422).end('Must Include ID');
+    }
+
+    let aidRequest = await prisma.aidRequest.findFirst({
+      where: {
+        id: Number(id)
+      }
+    });
+
+    if (!aidRequest) {
+      return res.status(404).end('Aid Request Not Found');
+    }
+
+    aidRequest = await prisma.aidRequest.update({
+      where: {
+        id: Number(id)
+      },
+      data: {
+        ...req.body
+      }
+    });
+
+    return res.json(aidRequest);
+  }
+
   return res.status(405).end(`Method ${req.method} Not Allowed`);
 };
 
