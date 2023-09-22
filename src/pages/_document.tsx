@@ -11,11 +11,7 @@ export default function Document() {
           key="description"
         />
 
-        <meta
-          name="keywords"
-          content="Derna Libya"
-          key="keywords"
-        />
+        <meta name="keywords" content="Derna Libya" key="keywords" />
 
         <meta
           name="google-site-verification"

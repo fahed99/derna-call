@@ -58,21 +58,26 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           <p className="w-full text-red flex justify-center">حدث خطأ</p>
         )}
 
-        {requestAids &&
-          !isLoading &&
-          !isError &&
-          requestAids.map((request) => (
-            <ListItem
-              key={request.id}
-              id={request.id}
-              onClick={() => handleClick(request)}
-              aidType={request.category}
-              address={request.address}
-              membersCount={request.familyMembers}
-              date={request.dateAdded}
-              fullDescription={request.description}
-            />
-          ))}
+        {!requestAids?.length && (
+          <div className="w-full mt-6 text-primary font-semibold text-2xl rounded-xl border-2 border-grey-50 flex justify-center py-10">
+            لا يوجد طلبات حاليا
+          </div>
+        )}
+
+        {requestAids?.length
+          ? requestAids.map((request) => (
+              <ListItem
+                key={request.id}
+                id={request.id}
+                onClick={() => handleClick(request)}
+                aidType={request.category}
+                address={request.address}
+                membersCount={request.familyMembers}
+                date={request.dateAdded}
+                fullDescription={request.description}
+              />
+            ))
+          : undefined}
       </div>
     </div>
   );

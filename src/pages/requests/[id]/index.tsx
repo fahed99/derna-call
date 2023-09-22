@@ -7,21 +7,22 @@ import Link from 'next/link';
 import Image from 'next/image';
 import MainLogo from '@images/main-logo.png';
 import Button from '@components/Button';
-import { getRequestByID } from '@hooks/getRequestByID';
-import { AidRequest } from '@customTypes/AidRequest';
+import { getRequestByID, useRequestById } from '@hooks/getRequestByID';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 type Props = {
-  requestData: AidRequest;
+  requestID: string;
 };
 
 const Request: NextPage<Props> = (props: Props) => {
-  const { requestData } = props;
+  const { requestID } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const router = useRouter();
   const { id } = router.query;
+  const { data: aidRequest } = useRequestById(requestID);
+  if (!aidRequest) return <></>;
 
   const handleComplete = async () => {
     setIsLoading(true);
@@ -65,30 +66,44 @@ const Request: NextPage<Props> = (props: Props) => {
         <div className="w-full flex justify-center text-3xl font-bold text-grey-100">
           بيانات أهلنا الغاليين علينا
         </div>
-        <div className="flex h-fit w-[70%] md:w-[50%] lg:w-[40%] xl:w-[30%] xxl:w-[20%] justify-center">
+        <div className="flex h-fit w-[70%] md:w-[55%] lg:w-[45%] xl:w-[35%] 2xl:w-[20%] justify-center">
           <div className="font-semibold text-xl w-full shadow-lg shadow-grey-50 rounded-xl py-12 px-10 flex flex-col gap-6">
             <ValuedFields
               field={'رقم الطلب'}
-              value={requestData.id.toString()}
+              value={aidRequest.id.toString()}
             />
 
-            {requestData.firstName && (
-              <ValuedFields field={'الاسم'} value={requestData.firstName} />
-            )}
-            <ValuedFields field={'التاريخ'} value={requestData.dateAdded} />
+            <ValuedFields
+              field={'الاسم'}
+              value={
+                aidRequest.firstName && aidRequest.firstName != ''
+                  ? aidRequest.firstName
+                  : 'مجهول'
+              }
+            />
 
-            <ValuedFields field={'نوع الطلب'} value={requestData.category} />
-            {requestData.address && (
-              <ValuedFields field={'العنوان'} value={requestData.address} />
-            )}
-            <ValuedFields field={'رقم التلفون'} value={requestData.phoneNum1} />
-            {requestData.phoneNum2 && (
+            <ValuedFields field={'التاريخ'} value={aidRequest.dateAdded} />
+
+            <ValuedFields field={'نوع الطلب'} value={aidRequest.category} />
+            <ValuedFields
+              field={'العنوان'}
+              value={
+                aidRequest.address && aidRequest.address != ''
+                  ? aidRequest.address
+                  : 'مجهول'
+              }
+            />
+            <Link href={`tel:${aidRequest.phoneNum1}`}>
+              <ValuedFields field={'رقم الهاتف'} value={aidRequest.phoneNum1} />
+            </Link>
+
+            {aidRequest.phoneNum2 && (
               <ValuedFields
-                field={'(2) رقم التلفون'}
-                value={requestData.phoneNum1}
+                field={'(2) رقم الهاتف'}
+                value={aidRequest.phoneNum2}
               />
             )}
-            <ValuedFields field={'وصف الطلب'} value={requestData.description} />
+            <ValuedFields field={'وصف الطلب'} value={aidRequest.description} />
             <div className="w-full flex justify-center gap-8 items-center pt-2">
               <button onClick={handleComplete} disabled={isLoading}>
                 <Button type="primary" title="تم المساعده" />
@@ -125,6 +140,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
   return {
     props: {
+      requestID,
       dehydratedState: dehydrate(queryClient),
       ...(await serverSideTranslations(locale as string, [
         'request',

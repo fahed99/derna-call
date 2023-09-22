@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
+import { DateConverter } from 'src/utils/DateConverter';
 
 const prisma = new PrismaClient();
 
@@ -39,7 +40,7 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
         address,
         category,
         description,
-        dateAdded: new Date().toISOString(),
+        dateAdded: DateConverter(new Date()),
         familyMembers,
         phoneNum1,
         phoneNum2,
