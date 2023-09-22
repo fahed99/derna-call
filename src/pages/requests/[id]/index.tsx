@@ -28,7 +28,6 @@ const Request: NextPage<Props> = (props: Props) => {
     setError(null);
 
     try {
-      console.log(id)
       const response = await fetch(`https://dernacall.ly/api/aidrequest?id=${id}`, {
         method: 'PATCH', // Assuming PATCH method for updates
         headers: {
@@ -85,9 +84,9 @@ const Request: NextPage<Props> = (props: Props) => {
             }
             <ValuedFields field={'رقم التلفون'} value={requestData.phoneNum1} />
             {requestData.phoneNum2 && 
-              <ValuedFields field={'رقم التلفون'} value={requestData.phoneNum1} />
+              <ValuedFields field={'(2) رقم التلفون'} value={requestData.phoneNum1} />
             }
-            <ValuedFields field={'وصف'} value={requestData.description} />
+            <ValuedFields field={'وصف الطلب'} value={requestData.description} />
             <div className="w-full flex justify-center gap-8 items-center pt-2">
               <button onClick={handleComplete} disabled={isLoading}>
                 <Button type="primary" title="تم المساعده" />

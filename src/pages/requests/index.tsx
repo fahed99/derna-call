@@ -47,9 +47,9 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           <div className="w-[20%]">تاريخ الطلب</div>
         </div>
 
-        {/* {isLoading && <p>Loading...</p>} */}
+        {/* {isLoading && <p>Loading...</p>}
 
-        {/* {isError && <p>Error loading data.</p>}  */}
+        {isError && <p>Error loading data.</p>}  */}
 
         {requestAids && !isLoading && !isError && requestAids.map((request) => (
           <ListItem
