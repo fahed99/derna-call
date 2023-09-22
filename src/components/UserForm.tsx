@@ -15,26 +15,22 @@ function UserForm() {
     address: '',
     category: '',
     description: '',
-    familyMembers: 0,
+    familyMembers: 1,
     phoneNum1: '',
     phoneNum2: ''
   });
   const [isLoading, setIsLoading] = useState(false);
-  console.log(formData);
-
   const [error, setError] = useState(null);
 
   const handleComplete = async () => {
-    console.log(formData);
     setIsLoading(true);
     setError(null);
 
     try {
       const response = await fetch(`https://dernacall.ly/api/aidrequest`, {
-        method: 'POST', // Assuming PATCH method for updates
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-          // ... (any other headers required, e.g. authorization)
         },
         body: JSON.stringify(formData)
       });
@@ -42,7 +38,6 @@ function UserForm() {
       if (!response.ok) {
         throw new Error('Failed to update the status');
       }
-      // Optionally navigate to another page or show a success message
       router.push(`success`);
     } catch (err: any) {
       setError(err.message);
@@ -64,12 +59,7 @@ function UserForm() {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-
-    // Send the form data to your API or server and save it to the database using Prisma
-    // Example Prisma usage:
-    // await prisma.user.create({ data: formData });
-
-    // Reset the form after submission
+    handleComplete();
     router.push('/success');
   };
 
@@ -113,7 +103,7 @@ function UserForm() {
               <div className="w-1/2">
                 <TextField
                   label="عدد الأفراد"
-                  type="text"
+                  type="number"
                   name="familyMembers"
                   value={formData.familyMembers}
                   onChange={handleInputChange}
@@ -146,7 +136,7 @@ function UserForm() {
               <div className="w-1/2">
                 <TextField
                   label="رقم الهاتف"
-                  type="text"
+                  type="number"
                   name="phoneNum1"
                   value={formData.phoneNum1}
                   onChange={handleInputChange}
@@ -156,7 +146,7 @@ function UserForm() {
                 <TextField
                   isOptional
                   label="رقم الهاتف 2"
-                  type="text"
+                  type="number"
                   name="phoneNum2"
                   value={formData.phoneNum2}
                   onChange={handleInputChange}
@@ -164,13 +154,11 @@ function UserForm() {
               </div>
             </div>
             <div className="w-full py-4 flex justify-center">
-              <button
-                type="submit"
-                onClick={handleComplete}
-                disabled={isLoading}>
+              <button type="submit" disabled={isLoading}>
                 <Button type="primary" title="تأكيد الطلب" />
               </button>
             </div>
+            {error ? <div className="text-red-500">{error}</div> : undefined}
           </form>
         </div>
       </div>
