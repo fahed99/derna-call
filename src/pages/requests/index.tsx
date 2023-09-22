@@ -19,8 +19,8 @@ const RequestsList: NextPage<Props> = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   // const [popUpDataID, setPopUpDataID] = useState(1);
   const { data: requestAids, isLoading, isError } = useRequests();
-  const [selectedRequestData, setSelectedRequestData] = useState<AidRequest | null>(null);
-
+  const [selectedRequestData, setSelectedRequestData] =
+    useState<AidRequest | null>(null);
 
   const handleClick = (request: AidRequest) => {
     setSelectedRequestData(request);
@@ -34,10 +34,13 @@ const RequestsList: NextPage<Props> = (props: Props) => {
         className="w-[240px] md:w-[25%] lg:w-[20%] flex justify-center">
         <Image priority src={MainLogo} alt="Logo" />
       </Link>
-      {
-        selectedRequestData && 
-        <Popup isOpen={isOpen} setIsOpen={setIsOpen} requestData={selectedRequestData} />
-      }
+      {selectedRequestData && (
+        <Popup
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          requestData={selectedRequestData}
+        />
+      )}
 
       <div className="w-[85%] flex flex-col gap-0.5 md:w-[75%] lg:w-[65%]">
         <div className="flex font-semibold md:pl-12 tracking-wide text-primary-100 text-lg justify-start text-right items-end flex-row-reverse rtl">
@@ -47,22 +50,29 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           <div className="w-[20%]">تاريخ الطلب</div>
         </div>
 
-        {/* {isLoading && <p>Loading...</p>}
+        {isLoading && (
+          <p className="w-full flex justify-center">يتم التحميل الآن</p>
+        )}
 
-        {isError && <p>Error loading data.</p>}  */}
+        {isError && (
+          <p className="w-full text-red flex justify-center">حدث خطأ</p>
+        )}
 
-        {requestAids && !isLoading && !isError && requestAids.map((request) => (
-          <ListItem
-            key={request.id}
-            id={request.id}
-            onClick={() => handleClick(request)}
-            aidType={request.category}
-            address={request.address}
-            membersCount={request.familyMembers}
-            date={request.dateAdded}
-            fullDescription={request.description}
-          />
-        ))}
+        {requestAids &&
+          !isLoading &&
+          !isError &&
+          requestAids.map((request) => (
+            <ListItem
+              key={request.id}
+              id={request.id}
+              onClick={() => handleClick(request)}
+              aidType={request.category}
+              address={request.address}
+              membersCount={request.familyMembers}
+              date={request.dateAdded}
+              fullDescription={request.description}
+            />
+          ))}
       </div>
     </div>
   );

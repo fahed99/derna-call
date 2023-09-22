@@ -52,7 +52,7 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (req.method === 'GET') {
-    const { id } = req.query;
+    const { id, status } = req.query;
 
     // Check if an ID was provided in the query
     if (id) {
@@ -69,8 +69,26 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(200).json(aidRequest);
     }
 
-    // If no ID provided, return all aidRequests
-    const aidRequests = await prisma.aidRequest.findMany();
+    if (status === 'resolved') {
+      if (req.query.secret !== process.env.AID_REQUEST_TOKEN) {
+        return res.status(401).json({ message: 'Invalid token' });
+      }
+    }
+    if (status === 'open' || status === 'in-progress') {
+      // If no ID provided, return all aidRequests
+      const aidRequests = await prisma.aidRequest.findMany({
+        where: {
+          status: status
+        }
+      });
+      res.status(200).json(aidRequests);
+    }
+    const aidRequests = await prisma.aidRequest.findMany({
+      where: {
+        status: 'open'
+      }
+    });
+
     return res.status(200).json(aidRequests);
   }
 
