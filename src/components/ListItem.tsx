@@ -2,6 +2,10 @@ import { FC, MouseEventHandler } from 'react';
 import Button from './Button';
 import Image from 'next/image';
 import Medicine from '@images/medicine.png';
+import Food from '@images/food.png';
+import Housing from '@images/housing.png';
+import Other from '@images/other.png';
+
 interface Props {
   id: number;
   aidType: string;
@@ -12,16 +16,16 @@ interface Props {
   onClick: MouseEventHandler<HTMLDivElement>;
 }
 const ListItem: FC<Props> = (props) => {
-  const { aidType, address, membersCount, date, onClick } = props;
+  const { id, aidType, address, membersCount, date, onClick } = props;
 
   return (
     <>
       <div
-        className="w-[350px] cursor-pointer h-[270px] flex items-center flex-col px-4 py-3 gap-6 border border-open shadow-md hover:shadow-lg hover:shadow-grey-50 shadow-grey-50 rounded-lg"
+        className="w-[350px] cursor-pointer h-[270px] flex items-center flex-col px-4 py-3 border border-open shadow-md hover:shadow-lg hover:shadow-grey-50 shadow-grey-50 rounded-lg"
         onClick={onClick}>
         <div className="flex w-full">
           <div className="text-right text-grey-50 text-sm font-semibold w-1/2">
-            #1
+            #{id}
           </div>
           <div className="w-1/2 flex justify-end">
             <div className="rounded-lg shadow-none text-grey-50 font-semibold bg-open w-fit py-1 px-2">
@@ -66,8 +70,8 @@ const ListItem: FC<Props> = (props) => {
               </div>
             </div>
           </div>
-          <div className="md:w-[35%] py-8">
-            <Image src={Medicine} alt="medicine" />
+          <div className="items-left w-[40%] md:w-[35%] py-8">
+            <Image src={aidType === 'دواء' ? Medicine : aidType === 'غداء' ? Food : aidType === 'سكن' ? Housing : Other} alt={aidType} />
           </div>
         </div>
         <div className="relative w-[100px]">

@@ -41,25 +41,26 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           requestData={selectedRequestData}
         />
       )}
-      <div dir="rtl" className="w-[85%] text-grey-100 font-semibold text-2xl">
+      <div dir="rtl" className="w-[85%] max-w-[1200px] text-grey-100 font-semibold text-2xl">
         طلبات المساعدة المتاحة حاليا
       </div>
 
-      <div dir="rtl" className="w-[85%] justify-center sm:justify-start grid">
+      <div dir="rtl" className="w-[85%] max-w-[1200px] justify-center sm:justify-start grid gap-10 md:gap-6">
         {isLoading && (
-          <p className="w-full flex justify-center">يتم التحميل الآن</p>
+          <p className="w-full flex justify-center">يتم التحميل الآن</p> 
         )}
 
         {isError && (
-          <p className="w-full text-red flex justify-center">حدث خطأ</p>
-        )}
-
-        {!requestAids?.length && (
-          <div className="w-full mt-6 text-primary font-semibold text-2xl rounded-xl border-2 border-grey-50 flex justify-center py-10">
-            لا يوجد طلبات حاليا
+          <div className="w-full mt-6 text-red font-semibold text-xl rounded-xl border-2 border-grey-50 flex justify-center py-4 px-4">
+            حدث خطأ
           </div>
         )}
 
+        {!requestAids?.length && (
+          <div className="w-full mt-6 text-primary font-semibold text-xl rounded-xl border-2 border-grey-50 flex justify-center py-4 px-4">
+            لا يوجد طلبات حاليا
+          </div>
+        )}
         {requestAids?.length
           ? requestAids.map((request) => (
               <ListItem
