@@ -31,7 +31,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
     <div className="h-screen flex items-center flex-col gap-4">
       <Link
         href={'/'}
-        className="w-[240px] md:w-[25%] lg:w-[20%] flex justify-center">
+        className="w-[240px] md:w-[25%] lg:w-[20%] py-6 flex justify-center">
         <Image priority src={MainLogo} alt="Logo" />
       </Link>
       {selectedRequestData && (
@@ -41,15 +41,11 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           requestData={selectedRequestData}
         />
       )}
+      <div dir="rtl" className="w-[85%] text-grey-100 font-semibold text-2xl">
+        طلبات المساعدة المتاحة حاليا
+      </div>
 
-      <div className="w-[85%] flex flex-col gap-0.5 md:w-[75%] lg:w-[65%]">
-        <div className="flex font-semibold md:pl-12 tracking-wide text-primary-100 text-lg justify-start text-right items-end flex-row-reverse rtl">
-          <div className="w-[30%]">نوع الطلب</div>
-          <div className="w-[30%]">العنوان</div>
-          <div className="w-[20%]">عدد الأفراد</div>
-          <div className="w-[20%]">تاريخ الطلب</div>
-        </div>
-
+      <div dir="rtl" className="w-[85%] grid grid-cols-4 rtl">
         {isLoading && (
           <p className="w-full flex justify-center">يتم التحميل الآن</p>
         )}

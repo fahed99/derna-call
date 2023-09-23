@@ -22,7 +22,9 @@ const Request: NextPage<Props> = (props: Props) => {
   const router = useRouter();
   const { id } = router.query;
   const { data: aidRequest } = useRequestById(requestID);
-  if (!aidRequest) return <></>;
+  if (!aidRequest?.id) {
+    return <></>;
+  }
 
   const handleComplete = async () => {
     setIsLoading(true);
@@ -112,7 +114,6 @@ const Request: NextPage<Props> = (props: Props) => {
                 <div className="text-red-700 max-w-full text-right">متمش</div>
               </Link>
             </div>
-            {/* Show error message if any */}
             {error ? <div className="text-red-500">{error}</div> : undefined}
           </div>
         </div>

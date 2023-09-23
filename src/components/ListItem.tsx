@@ -1,6 +1,7 @@
 import { FC, MouseEventHandler } from 'react';
 import Button from './Button';
-
+import Image from 'next/image';
+import Medicine from '@images/medicine.png';
 interface Props {
   id: number;
   aidType: string;
@@ -11,28 +12,67 @@ interface Props {
   onClick: MouseEventHandler<HTMLDivElement>;
 }
 const ListItem: FC<Props> = (props) => {
-  const { aidType, address, membersCount, date, onClick } =
-    props;
+  const { aidType, address, membersCount, date, onClick } = props;
 
   return (
     <>
       <div
-        className="mt-4 mb-8 cursor-pointer w-full flex flex-col items-center tracking-wide rounded-3xl drop-shadow-[0_6px_6px_rgba(0,0,0,0.30)] hover:drop-shadow-[0_6px_6px_rgba(0,0,0,0.55)] bg-white py-6 px-3"
+        className="w-[340px] h-[270px] flex items-center flex-col px-4 py-3 gap-6 border border-open shadow-md shadow-grey-50 rounded-lg"
         onClick={onClick}>
-        <div className="flex w-full md:pl-10 text-grey-100 text-opacity-90 flex-row-reverse text-right items-center justify-between">
-          <div className="w-[30%]">{aidType}</div>
-          <div className="w-[30%]">{address}</div>
-          <div className="w-[20%] pr-6">{membersCount}</div>
-          <div className="w-[25%] pr-6 relative">
-            {date}
-            <div className="absolute hidden md:block -left-[100px] -top-1.5">
-              <Button type="secondary" title={'المزيد'} />
+        <div className="flex w-full">
+          <div className="text-right text-grey-50 text-sm font-semibold w-1/2">
+            #1
+          </div>
+          <div className="w-1/2 flex justify-end">
+            <div className="rounded-lg shadow-none text-grey-50 font-semibold bg-open w-fit py-1 px-2">
+              مفتوح
             </div>
           </div>
         </div>
-        <div className="md:hidden bg-primary-100 w-[100px] relative">
-          <div className="absolute top-1">
-            <Button type="secondary" title={'المزيد'} />
+        <div className="flex w-full">
+          <div className="md:w-[65%] flex gap-[25%]">
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col text-right gap-0.5">
+                <div className="text-md font-semibold text-grey-100">
+                  التاريخ
+                </div>
+                <div className="text-sm font-regular text-grey-100">{date}</div>
+              </div>
+              <div className="flex flex-col text-right gap-0.5">
+                <div className="text-md font-semibold text-grey-100">
+                  عدد الأفراد
+                </div>
+                <div className="text-sm font-regular text-grey-100">
+                  {membersCount}
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col text-right gap-0.5">
+                <div className="text-md font-semibold text-grey-100">
+                  نوع الطلب
+                </div>
+                <div className="text-sm font-regular text-grey-100">
+                  {aidType}
+                </div>
+              </div>
+              <div className="flex flex-col text-right gap-0.5">
+                <div className="text-md font-semibold text-grey-100">
+                  العنوان
+                </div>
+                <div className="text-sm font-regular text-grey-100">
+                  {address}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="md:w-[35%] py-8">
+            <Image src={Medicine} alt="medicine" />
+          </div>
+        </div>
+        <div className="relative w-[100px]">
+          <div className="absolute top-3">
+            <Button type="secondary" title="المزيد" />
           </div>
         </div>
       </div>
