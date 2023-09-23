@@ -41,11 +41,11 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           requestData={selectedRequestData}
         />
       )}
-      <div dir="rtl" className="w-[85%] max-w-[1200px] text-grey-100 font-semibold text-2xl">
+      <div dir="rtl" className="md:w-[85%] max-w-[1200px] text-grey-100 font-semibold text-2xl pb-8">
         طلبات المساعدة المتاحة حاليا
       </div>
 
-      <div dir="rtl" className="w-[85%] max-w-[1200px] justify-center sm:justify-start grid gap-10 md:gap-6">
+      <div dir="rtl" className="md:w-[85%] max-w-[1200px] justify-center sm:justify-start grid gap-10 md:gap-6">
         {isLoading && (
           <p className="w-full flex justify-center">يتم التحميل الآن</p> 
         )}
