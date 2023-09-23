@@ -19,5 +19,6 @@ model AidRequest {
   phoneNum1     String    @map("phone_num_1")
   phoneNum2     String?   @map("phone_num_2")
   status        String    @default("open") @map("status") @db.VarChar(16)
-  tweetId      String?
+  callsCount    Int       @default(0) @db.VarChar(4)
+  tweetId       String?
 }

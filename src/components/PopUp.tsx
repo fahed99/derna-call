@@ -67,7 +67,7 @@ const Popup: FC<Props> = (props: Props) => {
                 width={32}
                 src={close}
                 alt="close"
-              />  
+              />
             </div>
             {requestData && (
               <>
@@ -95,7 +95,7 @@ const Popup: FC<Props> = (props: Props) => {
                       العنوان
                     </div>
                     <div className="font-medium text-grey-100 text-md pr-1">
-                      {requestData.address} 
+                      {requestData.address}
                     </div>
                   </div>
                   <div className="w-fit flex flex-col gap-2">
@@ -103,7 +103,7 @@ const Popup: FC<Props> = (props: Props) => {
                       عدد الأفراد
                     </div>
                     <div className="font-semibold text-grey-100 text-lg">
-                      {requestData.familyMembers}  
+                      {requestData.familyMembers}
                     </div>
                   </div>
                 </div>
@@ -112,7 +112,7 @@ const Popup: FC<Props> = (props: Props) => {
                     وصف الطلب
                   </div>
                   <div className="font-medium text-grey-100 text-md pr-1">
-                    {requestData.description} 
+                    {requestData.description}
                   </div>
                 </div>
                 <div className="pt-6 w-full flex justify-center">

@@ -45,7 +45,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
         طلبات المساعدة المتاحة حاليا
       </div>
 
-      <div dir="rtl" className="w-[85%] grid grid-cols-4 rtl">
+      <div dir="rtl" className="w-[85%] justify-center sm:justify-start grid">
         {isLoading && (
           <p className="w-full flex justify-center">يتم التحميل الآن</p>
         )}

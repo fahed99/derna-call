@@ -17,7 +17,7 @@ const ListItem: FC<Props> = (props) => {
   return (
     <>
       <div
-        className="w-[340px] h-[270px] flex items-center flex-col px-4 py-3 gap-6 border border-open shadow-md shadow-grey-50 rounded-lg"
+        className="w-[350px] cursor-pointer h-[270px] flex items-center flex-col px-4 py-3 gap-6 border border-open shadow-md hover:shadow-lg hover:shadow-grey-50 shadow-grey-50 rounded-lg"
         onClick={onClick}>
         <div className="flex w-full">
           <div className="text-right text-grey-50 text-sm font-semibold w-1/2">

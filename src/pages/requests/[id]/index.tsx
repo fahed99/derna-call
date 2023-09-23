@@ -57,8 +57,9 @@ const Request: NextPage<Props> = (props: Props) => {
 
   return (
     <>
-      <PlanesBackground />
-      <div className="w-screen h-screen flex flex-col items-center gap-6">
+      <div className="w-screen relative min-h-[900px] h-screen flex flex-col items-center gap-6">
+        <PlanesBackground />
+
         <Link
           href={'/'}
           className="w-[240px] md:w-[25%] lg:w-[20%] flex justify-center">
