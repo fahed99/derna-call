@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   return (
-    <div className="h-screen min-h-[900px] overflow-y-scroll w-screen overflow-hidden relative flex flex-col gap-5 justify-center items-center text-grey-50">
+    <div className="h-screen min-h-[900px] overflow-y-scroll flex flex-col gap-5 justify-center items-center text-grey-50">
       <BlueEllipse />
       <div
         className={`w-[400px]

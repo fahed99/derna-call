@@ -13,7 +13,7 @@ const config: Config = {
           50: '#AAAAAA',
           100: '#3B434C'
         },
-        inProgress: {
+        pending: {
           DEFAULT: '#F9E7B9'
         },
         open: {

@@ -17,7 +17,7 @@ const getRequests = async (
 
 const useRequests = (status?: AidRequest['status']) => {
   return useQuery(['aidRequests', status ? status : 'all'], () =>
-    getRequests()
+    getRequests(status)
   );
 };
 

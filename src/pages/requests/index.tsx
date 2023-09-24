@@ -15,7 +15,7 @@ type Props = {
 
 const RequestsList: NextPage<Props> = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { data: requestAidsOpen, isLoading, isError } = useRequests();
+  const { data: requestAidsOpen, isLoading, isError } = useRequests('open');
   const { data: requestAidsPending } = useRequests('pending');
   const [selectedRequestData, setSelectedRequestData] =
     useState<AidRequest | null>(null);
@@ -28,7 +28,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
   return (
     <div
       dir="rtl"
-      className="h-screen bg-grey-10 flex items-center flex-col gap-4">
+      className="overflow-scroll h-full pb-14 flex items-center flex-col gap-4">
       <Link
         href={'/'}
         className="w-[240px] md:w-[25%] lg:w-[20%] py-6 flex justify-center">
@@ -41,7 +41,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           requestData={selectedRequestData}
         />
       )}
-      <div className='flex flex-col gap-12'>
+      <div className="flex flex-col gap-12">
         <div>
           <div
             dir="rtl"
@@ -73,6 +73,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
                     key={request.id}
                     id={request.id}
                     onClick={() => handleClick(request)}
+                    status={request.status}
                     aidType={request.category}
                     address={request.address}
                     membersCount={request.familyMembers}
@@ -83,7 +84,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
               : undefined}
           </div>
         </div>
-        <div className='w-full text-center text-xl text-primary pt-4'>
+        <div className="w-full text-center text-xl text-primary pt-4">
           <span>• • •</span>
         </div>
         {/* // Change text to "Current pending orders" */}
@@ -91,7 +92,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           <div
             dir="rtl"
             className="w-full px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-8">
-            طلبات المساعدة المتاحة حاليا
+            طلبات المساعدة قيد التنفيذ
           </div>
           <div
             dir="rtl"
@@ -99,21 +100,24 @@ const RequestsList: NextPage<Props> = (props: Props) => {
             {isLoading && (
               <p className="w-full flex justify-center">يتم التحميل الآن</p>
             )}
-            {requestAidsPending?.length
-              ? requestAidsPending.map((request) => (
-                  <ListItem
-                    key={request.id}
-                    id={request.id}
-                    onClick={() => handleClick(request)}
-                    aidType={request.category}
-                    address={request.address}
-                    membersCount={request.familyMembers}
-                    date={request.dateAdded}
-                    fullDescription={request.description}
-                  />
-                ))
-                // TODO: Change text to "There are currently no pending orders."
-              : <p className="w-full flex justify-center">يتم التحميل الآن</p>}
+            {requestAidsPending?.length ? (
+              requestAidsPending.map((request) => (
+                <ListItem
+                  key={request.id}
+                  id={request.id}
+                  status={request.status}
+                  onClick={() => handleClick(request)}
+                  aidType={request.category}
+                  address={request.address}
+                  membersCount={request.familyMembers}
+                  date={request.dateAdded}
+                  fullDescription={request.description}
+                />
+              ))
+            ) : (
+              // TODO: Change text to "There are currently no pending orders."
+              <p className="w-full flex justify-center">يتم التحميل الآن</p>
+            )}
           </div>
         </div>
       </div>
@@ -134,7 +138,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
   });
 
-  await queryClient.prefetchQuery(['aidRequests', 'open'], () => getRequests());
+  await queryClient.prefetchQuery(['aidRequests', 'open'], () =>
+    getRequests('open')
+  );
   await queryClient.prefetchQuery(['aidRequests', 'pending'], () =>
     getRequests('pending')
   );
