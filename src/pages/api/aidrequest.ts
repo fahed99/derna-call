@@ -82,6 +82,10 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
       } else {
         res.status(400).json({ message: 'Please use an existing status such as: open, closed, pending, resolved' });
       }
+    } else {
+      // If neither ID nor status is provided, return all aidRequests
+      const allAidRequests = await prisma.aidRequest.findMany();
+      res.status(200).json(allAidRequests);
     }
   }
 
