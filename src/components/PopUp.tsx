@@ -71,7 +71,7 @@ const Popup: FC<Props> = (props: Props) => {
             </div>
             {requestData && (
               <>
-                <div className="h-fit w-full md:px-10 pt-10 flex text-right gap-[10%] md:gap-[25%] flex-row-reverse">
+                <div className="h-fit w-full px-6 sm:px-10 pt-10 grid grid-cols-2 gap-y-14 sm:grid-cols-3 md:grid-cols-4 text-right gap-[12%]">
                   <div className="w-fit flex flex-col gap-2">
                     <div className="font-semibold text-grey-100 text-lg">
                       نوع الطلب
@@ -88,8 +88,6 @@ const Popup: FC<Props> = (props: Props) => {
                       {requestData.dateAdded}
                     </div>
                   </div>
-                </div>
-                <div className="h-fit w-full md:px-10 pt-10 flex text-right gap-[10%] md:gap-[25%] flex-row-reverse">
                   <div className="w-fit flex flex-col gap-2">
                     <div className="font-semibold text-grey-100 text-lg">
                       العنوان
@@ -107,7 +105,7 @@ const Popup: FC<Props> = (props: Props) => {
                     </div>
                   </div>
                 </div>
-                <div className="w-full flex text-right flex-col items-end gap-2 md:px-10">
+                <div className="w-full flex text-right flex-col items-start gap-2 px-6 sm:px-10">
                   <div className="font-semibold text-grey-100 text-lg">
                     وصف الطلب
                   </div>

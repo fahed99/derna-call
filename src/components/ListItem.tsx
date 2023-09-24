@@ -21,7 +21,7 @@ const ListItem: FC<Props> = (props) => {
   return (
     <>
       <div
-        className="w-[350px] cursor-pointer h-[270px] flex items-center flex-col px-4 py-3 border border-open shadow-md hover:shadow-lg hover:shadow-grey-50 shadow-grey-50 rounded-lg"
+        className="w-[330px] cursor-pointer h-[270px] md:col-span-auto flex items-center flex-col px-4 py-3 border border-open shadow-md hover:shadow-lg hover:shadow-grey-50 shadow-grey-50 rounded-lg"
         onClick={onClick}>
         <div className="flex w-full">
           <div className="text-right text-grey-50 text-sm font-semibold w-1/2">
@@ -71,11 +71,22 @@ const ListItem: FC<Props> = (props) => {
             </div>
           </div>
           <div className="items-left w-[40%] md:w-[35%] py-8">
-            <Image src={aidType === 'دواء' ? Medicine : aidType === 'غداء' ? Food : aidType === 'سكن' ? Housing : Other} alt={aidType} />
+            <Image
+              src={
+                aidType === 'دواء'
+                  ? Medicine
+                  : aidType === 'غذاء'
+                  ? Food
+                  : aidType === 'سكن'
+                  ? Housing
+                  : Other
+              }
+              alt={aidType}
+            />
           </div>
         </div>
         <div className="relative w-[100px]">
-          <div className="absolute top-3">
+          <div className="absolute top-3 md:top-8">
             <Button type="secondary" title="المزيد" />
           </div>
         </div>

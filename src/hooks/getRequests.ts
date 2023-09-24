@@ -1,17 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
 import { AidRequest } from '@customTypes/AidRequest';
 
-const getRequests = async (): Promise<AidRequest[]> => {
-  return await fetch(`https://dernacall.ly/api/aidrequest`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
+const getRequests = async (
+  status?: AidRequest['status']
+): Promise<AidRequest[]> => {
+  return await fetch(
+    `https://dernacall.ly/api/aidrequest${status ? `?status=${status}` : ''}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }
-  }).then((res) => res.json());
+  ).then((res) => res.json());
 };
 
-const useRequests = () => {
-  return useQuery(['aidRequests'], () => getRequests());
+const useRequests = (status?: AidRequest['status']) => {
+  return useQuery(['aidRequests', status ? status : 'all'], () =>
+    getRequests()
+  );
 };
 
 export { useRequests, getRequests };

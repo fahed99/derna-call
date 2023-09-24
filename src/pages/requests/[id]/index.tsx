@@ -39,7 +39,7 @@ const Request: NextPage<Props> = (props: Props) => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            status: 'pending'
+            status: 'in-progress'
           })
         }
       );
@@ -57,20 +57,20 @@ const Request: NextPage<Props> = (props: Props) => {
 
   return (
     <>
-      <div className="w-screen relative min-h-[900px] h-screen flex flex-col items-center gap-6">
-        <PlanesBackground />
-
+      <div className="w-screen overflow-y-scroll min-h-[900px] h-screen flex flex-col items-center gap-6">
         <Link
           href={'/'}
           className="w-[240px] md:w-[25%] lg:w-[20%] flex justify-center">
           <Image priority src={MainLogo} alt="Logo" />
         </Link>
 
-        <div className="w-full flex justify-center text-3xl font-bold text-grey-100">
-          بيانات أهلنا الغاليين علينا
+        <div className="w-full flex justify-center text-xl sm:text-3xl font-bold text-grey-100">
+          بيانات أهلنا
         </div>
-        <div className="flex h-fit w-[70%] md:w-[55%] lg:w-[45%] xl:w-[35%] 2xl:w-[20%] justify-center">
-          <div className="font-semibold text-xl w-full shadow-lg shadow-grey-50 rounded-xl py-12 px-10 flex flex-col gap-6">
+        <div className="flex max-w-[720px] max-h-[520px] sm:max-h-none w-full px-4 justify-center">
+          <div className="font-semibold relative text-xl w-full shadow-lg shadow-grey-100 rounded-xl py-6 sm:py-12 px-10 flex flex-col gap-6">
+            <PlanesBackground />
+
             <ValuedFields
               field={'رقم الطلب'}
               value={aidRequest.id.toString()}
@@ -107,12 +107,14 @@ const Request: NextPage<Props> = (props: Props) => {
               />
             )}
             <ValuedFields field={'وصف الطلب'} value={aidRequest.description} />
-            <div className="w-full flex justify-center gap-8 items-center pt-2">
+            <div className="w-full flex text-md justify-center gap-8 items-center pt-2">
               <button onClick={handleComplete} disabled={isLoading}>
-                <Button type="primary" title="تم المساعده" />
+                <Button type="check" title="تم المساعده" />
               </button>
               <Link href={'/requests'}>
-                <div className="text-red-700 max-w-full text-right">متمش</div>
+                <div className="text-grey-50 max-w-full text-right">
+                  ليس بعد
+                </div>
               </Link>
             </div>
             {error ? <div className="text-red-500">{error}</div> : undefined}

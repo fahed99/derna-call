@@ -15,10 +15,9 @@ type Props = {
 };
 
 const RequestsList: NextPage<Props> = (props: Props) => {
-  // const { requestID } = props;
   const [isOpen, setIsOpen] = useState(false);
-  // const [popUpDataID, setPopUpDataID] = useState(1);
   const { data: requestAids, isLoading, isError } = useRequests();
+  const { data: requestAidsinProgress } = useRequests('in-progress');
   const [selectedRequestData, setSelectedRequestData] =
     useState<AidRequest | null>(null);
 
@@ -28,7 +27,9 @@ const RequestsList: NextPage<Props> = (props: Props) => {
   };
 
   return (
-    <div className="h-screen flex items-center flex-col gap-4">
+    <div
+      dir="rtl"
+      className="h-screen bg-grey-10 flex items-center flex-col gap-4">
       <Link
         href={'/'}
         className="w-[240px] md:w-[25%] lg:w-[20%] py-6 flex justify-center">
@@ -41,13 +42,17 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           requestData={selectedRequestData}
         />
       )}
-      <div dir="rtl" className="md:w-[85%] max-w-[1200px] text-grey-100 font-semibold text-2xl pb-8">
+      <div
+        dir="rtl"
+        className="w-full px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-8">
         طلبات المساعدة المتاحة حاليا
       </div>
 
-      <div dir="rtl" className="md:w-[85%] max-w-[1200px] justify-center sm:justify-start grid gap-10 md:gap-6">
+      <div
+        dir="rtl"
+        className="w-full px-2 md:px-16 justify-center sm:justify-start grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
         {isLoading && (
-          <p className="w-full flex justify-center">يتم التحميل الآن</p> 
+          <p className="w-full flex justify-center">يتم التحميل الآن</p>
         )}
 
         {isError && (
@@ -93,7 +98,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
   });
 
-  await queryClient.prefetchQuery(['aidRequests'], () => getRequests());
+  await queryClient.prefetchQuery(['aidRequests', 'all'], () => getRequests());
+  await queryClient.prefetchQuery(['aidRequests', 'in-progress'], () =>
+    getRequests('in-progress')
+  );
 
   // if (!requestID) {
   // 	return {

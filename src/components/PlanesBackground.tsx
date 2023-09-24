@@ -16,21 +16,21 @@ const PlanesBackground: FC = () => {
         width={70}
         height={70}
         alt="Plane"
-        className="absolute left-[24%] top-[32%]"
+        className="absolute w-[50px] md:w-[100px] -top-[10%]"
       />
       <Image
         src={PaperPlane1}
         alt="Plane"
         width={130}
         height={130}
-        className="absolute right-2 sm:right-[24%] bottom-[5%]"
+        className="absolute w-[130px] md:w-[160px] -bottom-[16%] -right-[1%]"
       />
       <Image
         src={PaperPlane2}
         alt="Plane"
         width={100}
         height={100}
-        className="absolute left-2 sm:left-[20%] bottom-[5%]"
+        className="absolute w-[60px] md:w-[120px] -bottom-[16%]"
       />
     </div>
   );
