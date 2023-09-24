@@ -75,7 +75,7 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(401).json({ message: 'Invalid token' });
       }
     }
-    if (status === 'open' || status === 'in-progress') {
+    if (status === 'open' || status === 'pending') {
       // If no ID provided, return all aidRequests
       const aidRequests = await prisma.aidRequest.findMany({
         where: {

@@ -9,34 +9,34 @@ interface Props {
 
 const LandingCard: FC<Props> = (props) => {
   const { title, type, requestID } = props;
+  // TODO: This gives a build erorr. 
+  // const handleCall = async () => {
+  //   if (requestID) {
+  //     const { data: aidRequest } = useRequestById(requestID);
+  //     if (aidRequest) {
+  //       try {
+  //         const response = await fetch(
+  //           `https://dernacall.ly/api/aidrequest?id=${requestID}`,
+  //           {
+  //             method: 'PATCH',
+  //             headers: {
+  //               'Content-Type': 'application/json'
+  //             },
+  //             body: JSON.stringify({
+  //               callsCount: aidRequest.status + 1
+  //             })
+  //           }
+  //         );
 
-  const handleCall = async () => {
-    if (requestID) {
-      const { data: aidRequest } = useRequestById(requestID);
-      if (aidRequest) {
-        try {
-          const response = await fetch(
-            `https://dernacall.ly/api/aidrequest?id=${requestID}`,
-            {
-              method: 'PATCH',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                callsCount: aidRequest.status + 1
-              })
-            }
-          );
-
-          if (!response.ok) {
-            throw new Error('Failed to update the status');
-          }
-        } catch (err) {
-          throw new Error('err');
-        }
-      }
-    }
-  };
+  //         if (!response.ok) {
+  //           throw new Error('Failed to update the status');
+  //         }
+  //       } catch (err) {
+  //         throw new Error('err');
+  //       }
+  //     }
+  //   }
+  // };
 
   return (
     <>

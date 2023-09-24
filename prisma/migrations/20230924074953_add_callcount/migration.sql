@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `AidRequest` ADD COLUMN `callsCount` INTEGER NOT NULL DEFAULT 0;

@@ -39,7 +39,7 @@ const Request: NextPage<Props> = (props: Props) => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            status: 'in-progress'
+            status: 'pending'
           })
         }
       );

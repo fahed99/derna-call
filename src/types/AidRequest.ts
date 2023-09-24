@@ -10,6 +10,6 @@ export interface AidRequest {
   phoneNum1: string;
   phoneNum2?: string;
   tweetId?: string;
-  status: 'open' | 'closed' | 'in-progress' | 'resolved';
+  status: 'open' | 'closed' | 'pending' | 'resolved';
   callsCount: number;
 }
