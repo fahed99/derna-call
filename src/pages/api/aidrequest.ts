@@ -70,27 +70,19 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(200).json(aidRequest);
     }
 
-    if (status === 'resolved') {
-      if (req.query.secret !== process.env.AID_REQUEST_TOKEN) {
-        return res.status(401).json({ message: 'Invalid token' });
+    if (status) {
+      if (status === 'open' || status === 'pending' || status === 'resolved' || status === 'closed') {
+        // If no ID provided, return all aidRequests
+        const aidRequests = await prisma.aidRequest.findMany({
+          where: {
+            status: status
+          }
+        });
+        res.status(200).json(aidRequests);
+      } else {
+        res.status(400).json({ message: 'Please use an existing status such as: open, closed, pending, resolved' });
       }
     }
-    if (status === 'open' || status === 'pending') {
-      // If no ID provided, return all aidRequests
-      const aidRequests = await prisma.aidRequest.findMany({
-        where: {
-          status: status
-        }
-      });
-      res.status(200).json(aidRequests);
-    }
-    const aidRequests = await prisma.aidRequest.findMany({
-      where: {
-        status: 'open'
-      }
-    });
-
-    return res.status(200).json(aidRequests);
   }
 
   if (req.method === 'DELETE') {
