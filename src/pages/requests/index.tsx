@@ -15,7 +15,7 @@ type Props = {
 
 const RequestsList: NextPage<Props> = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { data: requestAidsOpen, isLoading, isError } = useRequests();
+  const { data: requestAidsOpen, isLoading, isError } = useRequests('open');
   const { data: requestAidsPending } = useRequests('pending');
   const [selectedRequestData, setSelectedRequestData] =
     useState<AidRequest | null>(null);
@@ -134,7 +134,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
   });
 
-  await queryClient.prefetchQuery(['aidRequests', 'open'], () => getRequests());
+  await queryClient.prefetchQuery(['aidRequests', 'open'], () => getRequests('open'));
   await queryClient.prefetchQuery(['aidRequests', 'pending'], () =>
     getRequests('pending')
   );
