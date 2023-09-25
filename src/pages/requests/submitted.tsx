@@ -6,7 +6,7 @@ import Link from 'next/link';
 import MainLogo from '@images/main-logo.png';
 import SuccessLogo from '@icons/SuccessLogo';
 
-const AccomplishedPage: NextPage = () => {
+const SubmittedPage: NextPage = () => {
   return (
     <div className="h-full text-xl flex flex-col gap-5 justify-center items-center text-grey-50">
       <Link
@@ -33,4 +33,4 @@ const AccomplishedPage: NextPage = () => {
     </div>
   );
 };
-export default AccomplishedPage;
+export default SubmittedPage;

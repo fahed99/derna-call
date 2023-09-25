@@ -27,9 +27,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
   };
 
   return (
-    <div
-      dir="rtl"
-      className="overflow-scroll h-full pb-14 flex items-center flex-col gap-4">
+    <div dir="rtl" className="h-full pb-14 flex items-center flex-col gap-4">
       <Link
         href={'/'}
         className="w-[240px] md:w-[25%] lg:w-[20%] py-6 flex justify-center">

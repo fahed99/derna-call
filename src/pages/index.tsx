@@ -6,11 +6,11 @@ import BlueEllipse from '@components/BlueEllipse';
 
 export default function Home() {
   return (
-    <div className="h-screen min-h-[900px] overflow-y-scroll flex flex-col gap-5 justify-center items-center text-grey-50">
+    <div className="h-screen min-h-[900px] flex flex-col gap-5 justify-center items-center text-grey-50">
       <BlueEllipse />
       <div
         className={`w-[400px]
-        m:w-[70%] md:w-[50%] lg:w-[40%] xl:w-[25%]`}>
+        m:w-[70%] md:w-[50%] lg:w-[40%]`}>
         <Image priority src={MainLogo} alt="Logo" />
       </div>
       <p className="text-xl w-[75%] text-primary rtl text-center">
@@ -26,14 +26,13 @@ export default function Home() {
             <Button type="primary" title={'طلب الدعم'} />
           </Link>
         </div>
-          <a 
-            href="https://estejaba.ly/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="w-fit gap-1 items-center flex flex-row-reverse rounded-3xl h-[55px] border-opacity-60 text-sm text-primary font-semibold border px-10 py-2 border-primary cursor-pointer"
-          >
-            تبحث عن أرقام الجهات المختصة؟ انقر هنا
-          </a>
+        <a
+          href="https://estejaba.ly/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-fit gap-1 items-center flex flex-row-reverse rounded-3xl h-[55px] border-opacity-60 text-sm text-primary font-semibold border px-10 py-2 border-primary cursor-pointer">
+          تبحث عن أرقام الجهات المختصة؟ انقر هنا
+        </a>
       </div>
     </div>
   );

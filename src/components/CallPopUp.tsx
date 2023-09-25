@@ -40,7 +40,7 @@ const CallPopUp: FC<Props> = (props: Props) => {
 
   const handleConfirm = () => {
     closePopup();
-    router.push('accomplished');
+    router.push('submitted');
   };
 
   const handleCancel = async () => {
