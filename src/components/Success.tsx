@@ -20,7 +20,7 @@ const Success: FC<Props> = (props) => {
       <div className="text-2xl text-primary-100 font-semibold">
         تم تقديم طلبك بنجاح
       </div>
-      <Link href="/">
+      <Link href="/requests">
         <Button type="primary" title={'تم'}></Button>
       </Link>
     </div>

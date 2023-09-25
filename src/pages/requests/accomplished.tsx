@@ -26,7 +26,7 @@ const AccomplishedPage: NextPage = () => {
         <div className="text-xl text-center text-primary-100 font-semibold">
           نشكرك بالنيابة عن اخواننا واخواتنا في درنة الغالية
         </div>
-        <Link href="/">
+        <Link href="/requests">
           <Button type="primary" title={'تم'}></Button>
         </Link>
       </div>

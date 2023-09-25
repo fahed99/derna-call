@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import MainLogo from '@images/main-logo.png';
 import BlueEllipse from '@components/BlueEllipse';
-import { useEffect, useState } from 'react';
 
 export default function Home() {
   return (
@@ -27,12 +26,14 @@ export default function Home() {
             <Button type="primary" title={'طلب الدعم'} />
           </Link>
         </div>
-        <Link prefetch={false} href={''} className="cursor-pointer py-4">
-          <button className="w-fit gap-1 items-center flex flex-row-reverse rounded-3xl h-[55px] border-opacity-60 text-sm text-primary font-semibold border px-10 py-2 border-primary">
-            <div>تبحث عن أرقام الجهات المختصة؟</div>
-            <div>انقر هنا</div>
-          </button>
-        </Link>
+          <a 
+            href="https://estejaba.ly/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="w-fit gap-1 items-center flex flex-row-reverse rounded-3xl h-[55px] border-opacity-60 text-sm text-primary font-semibold border px-10 py-2 border-primary cursor-pointer"
+          >
+            تبحث عن أرقام الجهات المختصة؟ انقر هنا
+          </a>
       </div>
     </div>
   );

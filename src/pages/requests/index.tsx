@@ -8,7 +8,7 @@ import Link from 'next/link';
 import MainLogo from '@images/main-logo.png';
 import { getRequests, useRequests } from '@hooks/getRequests';
 import { AidRequest } from '@customTypes/AidRequest';
-import NoRequests from '@images/no-requests.png';
+import NoRequests from '@images/no-requests.jpg';
 
 type Props = {
   requestID?: string;
@@ -65,7 +65,9 @@ const RequestsList: NextPage<Props> = (props: Props) => {
 
             {!requestAidsOpen?.length && (
               <div className="max-w-[330px]">
-                <Image src={NoRequests} alt="no-requests" />
+                <Link prefetch href={'/submit'} className="cursor-pointer">
+                  <Image src={NoRequests} alt="no-requests" />
+                </Link>
               </div>
             )}
             {requestAidsOpen?.length
