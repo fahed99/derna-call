@@ -10,6 +10,7 @@ import Button from '@components/Button';
 import { getRequestByID, useRequestById } from '@hooks/getRequestByID';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import CallPopUp from '@components/CallPopUp';
 
 type Props = {
   requestID: string;
@@ -18,6 +19,7 @@ type Props = {
 const Request: NextPage<Props> = (props: Props) => {
   const { requestID } = props;
   const [isLoading, setIsLoading] = useState(false);
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [error, setError] = useState(null);
   const router = useRouter();
   const { id } = router.query;
@@ -29,6 +31,7 @@ const Request: NextPage<Props> = (props: Props) => {
   const handleComplete = async () => {
     setIsLoading(true);
     setError(null);
+    setIsPopUpOpen(true);
 
     try {
       const response = await fetch(
@@ -47,7 +50,6 @@ const Request: NextPage<Props> = (props: Props) => {
       if (!response.ok) {
         throw new Error('Failed to update the status');
       }
-      router.push(`accomplished`);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -57,7 +59,12 @@ const Request: NextPage<Props> = (props: Props) => {
 
   return (
     <>
-      <div className="w-screen overflow-y-scroll min-h-[900px] h-screen flex flex-col items-center gap-6">
+      <CallPopUp
+        isOpen={isPopUpOpen}
+        setIsOpen={setIsPopUpOpen}
+        requestData={aidRequest}
+      />
+      <div className="overflow-y-scroll w-full min-h-[900px] h-screen flex flex-col items-center gap-6">
         <Link
           href={'/'}
           className="w-[240px] md:w-[25%] lg:w-[20%] flex justify-center">
@@ -96,27 +103,13 @@ const Request: NextPage<Props> = (props: Props) => {
                   : 'مجهول'
               }
             />
-            <Link href={`tel:${aidRequest.phoneNum1}`}>
-              <ValuedFields field={'رقم الهاتف'} value={aidRequest.phoneNum1} />
-            </Link>
-
-            {aidRequest.phoneNum2 && (
-              <ValuedFields
-                field={'(2) رقم الهاتف'}
-                value={aidRequest.phoneNum2}
-              />
-            )}
             <ValuedFields field={'وصف الطلب'} value={aidRequest.description} />
-            <div className="w-full flex text-md justify-center gap-8 items-center pt-2">
-              <button onClick={handleComplete} disabled={isLoading}>
-                <Button type="check" title="تم المساعده" />
-              </button>
-              <Link href={'/requests'}>
-                <div className="text-grey-50 max-w-full text-right">
-                  ليس بعد
-                </div>
-              </Link>
-            </div>
+            <button
+              className="w-full flex justify-center pt-2"
+              onClick={handleComplete}
+              disabled={isLoading}>
+              <Button type="call" title="الاتصال الآن" />
+            </button>
             {error ? <div className="text-red-500">{error}</div> : undefined}
           </div>
         </div>

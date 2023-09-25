@@ -8,6 +8,7 @@ import Link from 'next/link';
 import MainLogo from '@images/main-logo.png';
 import { getRequests, useRequests } from '@hooks/getRequests';
 import { AidRequest } from '@customTypes/AidRequest';
+import NoRequests from '@images/no-requests.png';
 
 type Props = {
   requestID?: string;
@@ -28,7 +29,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
   return (
     <div
       dir="rtl"
-      className="h-screen bg-grey-10 flex items-center flex-col gap-4">
+      className="overflow-scroll h-full pb-14 flex items-center flex-col gap-4">
       <Link
         href={'/'}
         className="w-[240px] md:w-[25%] lg:w-[20%] py-6 flex justify-center">
@@ -41,7 +42,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           requestData={selectedRequestData}
         />
       )}
-      <div className='flex flex-col gap-12'>
+      <div className="flex flex-col gap-12">
         <div>
           <div
             dir="rtl"
@@ -63,8 +64,8 @@ const RequestsList: NextPage<Props> = (props: Props) => {
             )}
 
             {!requestAidsOpen?.length && (
-              <div className="w-full mt-6 text-primary font-semibold text-xl rounded-xl border-2 border-grey-50 flex justify-center py-4 px-4">
-                لا يوجد طلبات حاليا
+              <div className="max-w-[330px]">
+                <Image src={NoRequests} alt="no-requests" />
               </div>
             )}
             {requestAidsOpen?.length
@@ -73,6 +74,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
                     key={request.id}
                     id={request.id}
                     onClick={() => handleClick(request)}
+                    status={request.status}
                     aidType={request.category}
                     address={request.address}
                     membersCount={request.familyMembers}
@@ -83,7 +85,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
               : undefined}
           </div>
         </div>
-        <div className='w-full text-center text-xl text-primary pt-4'>
+        <div className="w-full text-center text-xl text-primary pt-4">
           <span>• • •</span>
         </div>
         {/* // Change text to "Current pending orders" */}
@@ -91,7 +93,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           <div
             dir="rtl"
             className="w-full px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-8">
-            طلبات المساعدة المتاحة حاليا
+            طلبات المساعدة قيد التنفيذ
           </div>
           <div
             dir="rtl"
@@ -99,21 +101,24 @@ const RequestsList: NextPage<Props> = (props: Props) => {
             {isLoading && (
               <p className="w-full flex justify-center">يتم التحميل الآن</p>
             )}
-            {requestAidsPending?.length
-              ? requestAidsPending.map((request) => (
-                  <ListItem
-                    key={request.id}
-                    id={request.id}
-                    onClick={() => handleClick(request)}
-                    aidType={request.category}
-                    address={request.address}
-                    membersCount={request.familyMembers}
-                    date={request.dateAdded}
-                    fullDescription={request.description}
-                  />
-                ))
-                // TODO: Change text to "There are currently no pending orders."
-              : <p className="w-full flex justify-center">يتم التحميل الآن</p>}
+            {requestAidsPending?.length ? (
+              requestAidsPending.map((request) => (
+                <ListItem
+                  key={request.id}
+                  id={request.id}
+                  status={request.status}
+                  onClick={() => handleClick(request)}
+                  aidType={request.category}
+                  address={request.address}
+                  membersCount={request.familyMembers}
+                  date={request.dateAdded}
+                  fullDescription={request.description}
+                />
+              ))
+            ) : (
+              // TODO: Change text to "There are currently no pending orders."
+              <p className="w-full flex justify-center">يتم التحميل الآن</p>
+            )}
           </div>
         </div>
       </div>
@@ -134,7 +139,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
   });
 
-  await queryClient.prefetchQuery(['aidRequests', 'open'], () => getRequests('open'));
+  await queryClient.prefetchQuery(['aidRequests', 'open'], () =>
+    getRequests('open')
+  );
   await queryClient.prefetchQuery(['aidRequests', 'pending'], () =>
     getRequests('pending')
   );

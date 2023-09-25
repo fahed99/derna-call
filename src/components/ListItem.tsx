@@ -11,25 +11,47 @@ interface Props {
   aidType: string;
   address?: string;
   membersCount: number;
+  status: string;
   date: string;
   fullDescription: string;
   onClick: MouseEventHandler<HTMLDivElement>;
 }
 const ListItem: FC<Props> = (props) => {
-  const { id, aidType, address, membersCount, date, onClick } = props;
+  const { id, aidType, status, address, membersCount, date, onClick } = props;
+  let backgroundColor;
+  let borderColor;
+  let textColor;
+  let textString;
+  if (status === 'open') {
+    backgroundColor = 'bg-open';
+    borderColor = 'border-open';
+    textColor = 'text-open-text';
+    textString = 'متاح';
+  } else if (status === 'pending') {
+    backgroundColor = 'bg-pending';
+    borderColor = 'border-pending';
+    textColor = 'text-pending-text';
+    textString = 'قيد التنفيذ';
+  } else {
+    backgroundColor = 'bg-resolved';
+    borderColor = 'border-resolved';
+    textColor = 'text-resolved';
+    textString = 'تم الحل';
+  }
 
   return (
     <>
       <div
-        className="w-[330px] cursor-pointer h-[270px] md:col-span-auto flex items-center flex-col px-4 py-3 border border-open shadow-md hover:shadow-lg hover:shadow-grey-50 shadow-grey-50 rounded-lg"
+        className={`w-[330px] cursor-pointer h-[270px] md:col-span-auto flex items-center flex-col pr-4 py-3 border ${borderColor} shadow-md hover:shadow-lg hover:shadow-grey-50 shadow-grey-50 rounded-lg`}
         onClick={onClick}>
-        <div className="flex w-full">
+        <div className="flex w-full pl-4">
           <div className="text-right text-grey-50 text-sm font-semibold w-1/2">
             #{id}
           </div>
           <div className="w-1/2 flex justify-end">
-            <div className="rounded-lg shadow-none text-grey-50 font-semibold bg-open w-fit py-1 px-2">
-              مفتوح
+            <div
+              className={`rounded-lg shadow-none font-semibold ${backgroundColor} ${textColor} w-fit py-1 px-2`}>
+              {textString}
             </div>
           </div>
         </div>
@@ -70,7 +92,7 @@ const ListItem: FC<Props> = (props) => {
               </div>
             </div>
           </div>
-          <div className="items-left w-[40%] md:w-[35%] py-8">
+          <div className="items-left w-[40%] md:w-[35%] pl-0.5 py-8">
             <Image
               src={
                 aidType === 'دواء'

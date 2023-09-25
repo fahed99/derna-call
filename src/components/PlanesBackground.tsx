@@ -23,14 +23,14 @@ const PlanesBackground: FC = () => {
         alt="Plane"
         width={130}
         height={130}
-        className="absolute w-[130px] md:w-[160px] -bottom-[16%] -right-[1%]"
+        className="absolute w-[130px] md:w-[160px] -bottom-[23%] -right-[1%]"
       />
       <Image
         src={PaperPlane2}
         alt="Plane"
         width={100}
         height={100}
-        className="absolute w-[60px] md:w-[120px] -bottom-[16%]"
+        className="absolute w-[60px] md:w-[110px] -bottom-[18%]"
       />
     </div>
   );

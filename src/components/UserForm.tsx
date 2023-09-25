@@ -73,7 +73,7 @@ function UserForm() {
         </Link>
       </div>
 
-      <div className="w-screen h-screen flex justify-center">
+      <div className="w-full h-screen flex justify-center">
         <div className="hidden md:flex w-[40%] h-full bg-primary flex-col items-center py-14 gap-8">
           <Link className="w-[60%] lg:w-[50%] xl:w-[35%]" href={'/'}>
             <Image loading="eager" src={whiteLogo} alt="logo" />
@@ -81,7 +81,7 @@ function UserForm() {
           <Image
             src={character}
             alt="character"
-            className="w-[80%] lg:w-[70%] xl:w-[55%]"
+            className="w-[85%] lg:w-[90%] xl:w-[55%]"
           />
         </div>
         <div className="w-full sm:w-[80%] md:w-[60%] p-4 sm:p-14 xl:p-28">
