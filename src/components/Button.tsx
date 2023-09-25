@@ -3,13 +3,13 @@ import { FC } from 'react';
 
 interface Props {
   title: string;
-  type: 'primary' | 'secondary' | 'check';
+  type: 'primary' | 'secondary' | 'call' | 'check';
   requestID?: string;
 }
 
 const LandingCard: FC<Props> = (props) => {
   const { title, type, requestID } = props;
-  // TODO: This gives a build erorr. 
+  // TODO: This gives a build erorr.
   // const handleCall = async () => {
   //   if (requestID) {
   //     const { data: aidRequest } = useRequestById(requestID);
@@ -44,9 +44,17 @@ const LandingCard: FC<Props> = (props) => {
         <div className="h-[50px] shadow-md shadow-grey-50 w-[200px] rounded-3xl bg-primary flex justify-center items-center">
           <p className="text-white text-xl font-semibold">{title}</p>
         </div>
-      ) : type === 'check' ? (
+      ) : type === 'call' ? (
         <div className="h-[50px] shadow-md shadow-grey-50 w-[140px] rounded-3xl bg-primary flex justify-center items-center">
-          <p className="text-white text-xl font-semibold">{title}</p>
+          <p className="text-white text-base sm:text-lg font-semibold">
+            {title}
+          </p>
+        </div>
+      ) : type === 'check' ? (
+        <div className="h-[30px] shadow-md shadow-grey-50 w-[80px] rounded-3xl bg-primary flex justify-center items-center">
+          <p className="text-white text-base sm:text-lg font-semibold">
+            {title}
+          </p>
         </div>
       ) : (
         <div className="h-[35px] shadow-lg p-6 shadow-grey-50 w-[100px] rounded-xl bg-primary flex justify-center items-center">

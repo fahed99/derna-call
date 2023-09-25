@@ -8,6 +8,7 @@ import Link from 'next/link';
 import MainLogo from '@images/main-logo.png';
 import { getRequests, useRequests } from '@hooks/getRequests';
 import { AidRequest } from '@customTypes/AidRequest';
+import NoRequests from '@images/no-requests.png';
 
 type Props = {
   requestID?: string;
@@ -63,8 +64,8 @@ const RequestsList: NextPage<Props> = (props: Props) => {
             )}
 
             {!requestAidsOpen?.length && (
-              <div className="w-full mt-6 text-primary font-semibold text-xl rounded-xl border-2 border-grey-50 flex justify-center py-4 px-4">
-                لا يوجد طلبات حاليا
+              <div className="max-w-[330px]">
+                <Image src={NoRequests} alt="no-requests" />
               </div>
             )}
             {requestAidsOpen?.length

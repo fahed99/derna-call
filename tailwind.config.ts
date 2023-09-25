@@ -14,10 +14,16 @@ const config: Config = {
           100: '#3B434C'
         },
         pending: {
-          DEFAULT: '#F9E7B9'
+          DEFAULT: '#F9E7B9',
+          text: '#D7AD44'
         },
         open: {
-          DEFAULT: '#E7E1D3'
+          DEFAULT: '#E7E1D3',
+          text: '#969696'
+        },
+        resolved: {
+          DEFAULT: '#B9F9C7',
+          text: '#4FBA5A'
         }
       },
       backgroundImage: {
