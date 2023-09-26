@@ -108,6 +108,7 @@ function UserForm() {
             <div className="w-full flex flex-row-reverse gap-10">
               <div className="w-1/2">
                 <TextField
+                  maxLength={16}
                   isOptional
                   label="الإسم"
                   type="text"
@@ -118,6 +119,7 @@ function UserForm() {
               </div>
               <div className="w-1/2">
                 <TextField
+                  maxLength={3}
                   label="عدد الأفراد"
                   type="number"
                   name="familyMembers"
@@ -127,6 +129,7 @@ function UserForm() {
               </div>
             </div>
             <TextField
+              maxLength={32}
               isOptional
               label="العنوان"
               type="text"
@@ -135,6 +138,7 @@ function UserForm() {
               onChange={handleInputChange}
             />
             <TextField
+              maxLength={16}
               label="نوع الطلب"
               type="text"
               name="category"
@@ -142,6 +146,7 @@ function UserForm() {
               onChange={handleInputChange}
             />
             <TextField
+              maxLength={255}
               label="وصف الطلب"
               type="text"
               name="description"
@@ -151,6 +156,7 @@ function UserForm() {
             <div className="w-full flex flex-row-reverse gap-10">
               <div className="w-1/2">
                 <TextField
+                  maxLength={10}
                   label="رقم الهاتف"
                   type="number"
                   name="phoneNum1"
@@ -160,6 +166,7 @@ function UserForm() {
               </div>
               <div className="w-1/2">
                 <TextField
+                  maxLength={10}
                   isOptional
                   label="رقم الهاتف 2"
                   type="number"

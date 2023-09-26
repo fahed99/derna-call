@@ -1,6 +1,7 @@
 import { FC, ReactNode, useState } from 'react';
 
 interface Props {
+  maxLength: number;
   label: string;
   type: string;
   name: string;
@@ -10,7 +11,7 @@ interface Props {
 }
 
 const TextField: FC<Props> = (props) => {
-  const { label, type, name, value, onChange, isOptional } = props;
+  const { maxLength, label, type, name, value, onChange, isOptional } = props;
 
   return (
     <div>
@@ -22,6 +23,7 @@ const TextField: FC<Props> = (props) => {
       </div>
       {name === 'description' ? (
         <textarea
+          maxLength={maxLength}
           required={isOptional ? false : true}
           name={name}
           // value={value}
@@ -32,6 +34,7 @@ const TextField: FC<Props> = (props) => {
       ) : (
         <>
           <input
+            maxLength={maxLength}
             list={name === 'category' ? `${name}-datalist` : undefined}
             required={isOptional ? false : true}
             type={type}
