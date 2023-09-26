@@ -67,7 +67,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
 
             <div
               dir="rtl"
-              className="w-full px-2 md:px-16 justify-center gap-10 md:gap-10 lg:gap-10">
+              className="w-full flex px-2 md:px-16 justify-center items-center grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
               {isLoading && (
                 <p className="w-full flex justify-center">يتم التحميل الآن</p>
               )}
@@ -79,7 +79,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
 
               {!requestAidsOpen?.length && (
                 <div className="w-full flex flex-col items-center justify-center">
-                  <div className="md:w-[30%] lg:w-[30%] xl:w-[40%] w-[35%]">
+                  <div className="sm:w-[40%] md:w-[40%] lg:w-[35%] xl:w-[25%] w-[35%]">
                     <Image src={NoRequests} alt="no-requests" />
                   </div>
                   <div className="md:w-[60%] lg:w-[50%] w-[35%] flex flex-col items-center pt-2 gap-3">
@@ -125,7 +125,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
             </div>
             <div
               dir="rtl"
-              className="w-full flex px-2 md:px-16 justify-center sm:justify-start grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
+              className="w-full flex px-2 md:px-16 justify-center items-center grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
               {isLoading && (
                 <p className="w-full flex justify-center">يتم التحميل الآن</p>
               )}
