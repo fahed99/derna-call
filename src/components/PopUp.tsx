@@ -150,13 +150,17 @@ const Popup: FC<Props> = (props: Props) => {
                   </div>
                 </div>
                 <div className="pt-6 w-full flex justify-center">
-                {requestData.status === 'pending' ? (
-                  <Button type="primary" title="تقديم الدعم" className="cursor-not-allowed opacity-40" />
-                ) : (
-                  <Link href={'/requests/' + requestData.id}>
-                    <Button type="primary" title="تقديم الدعم" />
-                  </Link>
-                )}
+                  {requestData.status === 'pending' ? (
+                    <Button
+                      type="primary"
+                      title="تقديم الدعم"
+                      className="cursor-not-allowed opacity-40"
+                    />
+                  ) : (
+                    <Link href={'/requests/' + requestData.id}>
+                      <Button type="primary" title="تقديم الدعم" />
+                    </Link>
+                  )}
                 </div>
               </>
             )}

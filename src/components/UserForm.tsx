@@ -7,6 +7,7 @@ import Button from '@components/Button';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import MainLogo from '@images/main-logo.png';
+import GuidePopUp from '@components/GuidePopUp';
 
 function UserForm() {
   const router = useRouter();
@@ -19,6 +20,7 @@ function UserForm() {
     phoneNum1: '',
     phoneNum2: ''
   });
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -65,6 +67,12 @@ function UserForm() {
 
   return (
     <>
+      <GuidePopUp
+        isOpen={isPopUpOpen}
+        setIsOpen={setIsPopUpOpen}
+        type="requester"
+      />
+
       <div className="w-full flex justify-center md:hidden">
         <Link
           href={'/'}
@@ -81,12 +89,20 @@ function UserForm() {
           <Image
             src={character}
             alt="character"
-            className="w-[85%] lg:w-[90%] xl:w-[55%]"
+            className="w-[85%] xl:w-[65%]"
           />
         </div>
         <div className="w-full sm:w-[80%] md:w-[60%] p-4 sm:p-14 xl:p-28">
-          <div className="w-full py-10 flex justify-end text-3xl font-bold text-primary-100">
-            إملئ النموذج الآتي
+          <div
+            dir="rtl"
+            className="w-full py-10 flex flex-col md:flex-row justify-start items-start md:items-baseline gap-4 text-3xl font-bold text-primary-100">
+            <span className="order-2 md:order-none">إملئ النموذج الآتي</span>
+            <p
+              dir="rtl"
+              onClick={() => setIsPopUpOpen(true)}
+              className="text-sm text-primary underline rtl text-center">
+              الارشادات والتعليمات💡
+            </p>
           </div>
           <form className="flex flex-col gap-1" onSubmit={handleSubmit}>
             <div className="w-full flex flex-row-reverse gap-10">

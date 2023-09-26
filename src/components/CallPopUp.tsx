@@ -24,7 +24,7 @@ interface Props {
 
 const CallPopUp: FC<Props> = (props: Props) => {
   const { isOpen, setIsOpen, requestData } = props;
-  const [isLoading, setIsLoading] = useState(false);
+
   const [error, setError] = useState(null);
   const router = useRouter();
 
@@ -44,7 +44,6 @@ const CallPopUp: FC<Props> = (props: Props) => {
   };
 
   const handleCancel = async () => {
-    setIsLoading(true);
     setError(null);
 
     try {
@@ -67,8 +66,6 @@ const CallPopUp: FC<Props> = (props: Props) => {
       // router.push(`accomplished`);
     } catch (err: any) {
       setError(err.message);
-    } finally {
-      setIsLoading(false);
     }
   };
 
