@@ -6,12 +6,15 @@ export default function Document() {
     <Html>
       <Head>
         <meta
+          title="hi"
           name="description"
           content="A project to help those damaged by the floods in the great city of Derna."
           key="description"
         />
 
-        <meta name="keywords" content="Derna Libya" key="keywords" />
+        <meta name="keywords" content="Derna Call" key="keywords" />
+
+        <meta name="author" content="Derna Call" key="author" />
 
         <meta
           name="google-site-verification"

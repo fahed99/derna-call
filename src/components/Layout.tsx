@@ -10,7 +10,6 @@ interface Props {
 const Layout: FC<Props> = (props) => {
   const { children } = props;
   const router = useRouter();
-  console.log(router.asPath);
 
   return (
     <div className="text-grey-100 flex relative overflow-x-hidden w-full justify-center">

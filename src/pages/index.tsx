@@ -57,18 +57,28 @@ export default function Home() {
             className="w-fit gap-1 items-center flex flex-row-reverse rounded-3xl h-[55px] border-opacity-60 text-sm text-primary font-semibold border px-10 py-2 border-primary cursor-pointer">
             تبحث عن أرقام الجهات المختصة؟ انقر هنا
           </a>
-          {/* <div className="w-full pt-1 flex flex-col gap-2">
+          <div className="w-full pt-1 flex flex-col gap-2">
             <div className="w-full flex text-[11px] justify-center font-bold text-primary-100 text-opacity-80">
               للتواصل معنا
             </div>
             <div className="w-full flex justify-center gap-2">
-              <FacebookIcon
-                size={24}
-                color="fill-primary-100 stroke-primary-100"
-              />
-              <InstagramIcon size={24} color="stroke-primary-100" />
+              <a
+                href={'https://www.facebook.com/61551726666502/'}
+                target="_blank"
+                rel="noopener noreferrer">
+                <FacebookIcon
+                  size={24}
+                  color="fill-primary-100 stroke-primary-100"
+                />
+              </a>
+              <a
+                href={'https://www.instagram.com/dernacall/'}
+                target="_blank"
+                rel="noopener noreferrer">
+                <InstagramIcon size={24} color="stroke-primary-100" />
+              </a>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </>

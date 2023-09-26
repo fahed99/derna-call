@@ -20,7 +20,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: requestAidsOpen, isLoading, isError } = useRequests('open');
   const { data: requestAidsPending } = useRequests('pending');
-  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [isPopUpOpen, setIsPopUpOpen] = useState(true);
   const [selectedRequestData, setSelectedRequestData] =
     useState<AidRequest | null>(null);
 
@@ -49,107 +49,104 @@ const RequestsList: NextPage<Props> = (props: Props) => {
             requestData={selectedRequestData}
           />
         )}
-        <div className="flex flex-col gap-12">
-          <div>
-            <div
-              dir="rtl"
-              className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-8 items-center text-center">
-              <div className="order-2">
-                طلبات المساعدة المتاحة حاليا
-              </div>
-              <div
-                dir="rtl"
-                onClick={() => setIsPopUpOpen(true)}
-                className="w-fit text-sm order-1 text-primary pr-2 py-2 cursor-pointer underline">
-                الارشادات والتعليمات💡
-              </div>
-            </div>
 
-            <div
-              dir="rtl"
-              className="w-full flex px-2 md:px-16 justify-center items-center grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
-              {isLoading && (
-                <p className="w-full flex justify-center">يتم التحميل الآن</p>
-              )}
-              {isError && (
-                <p className="w-full text-center text-red-600 font-semibold text-xl justify-center">
-                  حدث خطأ
+        <div
+          dir="rtl"
+          className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-8 items-center text-center">
+          <div className="order-2">طلبات المساعدة المتاحة حاليا</div>
+          <div
+            dir="rtl"
+            onClick={() => setIsPopUpOpen(true)}
+            className="w-fit text-sm order-1 text-primary pr-2 py-2 cursor-pointer underline">
+            الارشادات والتعليمات💡
+          </div>
+        </div>
+
+        <div
+          dir="rtl"
+          className={`w-full px-2 md:px-16 justify-center items-center ${
+            requestAidsOpen?.length
+              ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 '
+              : ''
+          } gap-10 md:gap-10 lg:gap-10`}>
+          {isLoading && (
+            <p className="w-full flex justify-center">يتم التحميل الآن</p>
+          )}
+          {isError && (
+            <p className="w-full text-center text-red-600 font-semibold text-xl justify-center">
+              حدث خطأ
+            </p>
+          )}
+          {!requestAidsOpen?.length && (
+            <div className="w-full flex flex-col items-center justify-center">
+              <div className="sm:w-[40%] md:w-[40%] flex  lg:w-[35%] xl:w-[25%] w-[35%]">
+                <Image src={NoRequests} alt="no-requests" />
+              </div>
+              <div className="md:w-[60%] lg:w-[50%] w-[35%] flex flex-col items-center pt-2 gap-3">
+                <p className="text-primary-100 whitespace-nowrap font-semibold">
+                  لا يوجد طلبات حالياً
                 </p>
-              )}
+                <Link href={'/submit'}>
+                  <Button
+                    className="w-fit whitespace-nowrap"
+                    type="secondary"
+                    title="اطلب الدعم الآن"
+                  />
+                </Link>
+              </div>
+            </div>
+          )}
+          {requestAidsOpen?.length
+            ? requestAidsOpen.map((request) => (
+                <ListItem
+                  key={request.id}
+                  id={request.id}
+                  onClick={() => handleClick(request)}
+                  status={request.status}
+                  aidType={request.category}
+                  address={request.address}
+                  membersCount={request.familyMembers}
+                  date={request.dateAdded}
+                  fullDescription={request.description}
+                />
+              ))
+            : undefined}
+        </div>
 
-              {!requestAidsOpen?.length && (
-                <div className="w-full flex flex-col items-center justify-center">
-                  <div className="sm:w-[40%] md:w-[40%] lg:w-[35%] xl:w-[25%] w-[35%]">
-                    <Image src={NoRequests} alt="no-requests" />
-                  </div>
-                  <div className="md:w-[60%] lg:w-[50%] w-[35%] flex flex-col items-center pt-2 gap-3">
-                    <p className="text-primary-100 font-semibold">
-                      لا يوجد طلبات حالياً
-                    </p>
-                    <Link href={'/submit'}>
-                      <Button
-                        className="w-fit whitespace-nowrap"
-                        type="secondary"
-                        title="اطلب الدعم الآن"
-                      />
-                    </Link>
-                  </div>
-                </div>
-              )}
+        <div className="w-full text-center text-xl text-primary pt-4">
+          <span>• • •</span>
+        </div>
 
-              {requestAidsOpen?.length
-                ? requestAidsOpen.map((request) => (
-                    <ListItem
-                      key={request.id}
-                      id={request.id}
-                      onClick={() => handleClick(request)}
-                      status={request.status}
-                      aidType={request.category}
-                      address={request.address}
-                      membersCount={request.familyMembers}
-                      date={request.dateAdded}
-                      fullDescription={request.description}
-                    />
-                  ))
-                : undefined}
+        <div
+          dir="rtl"
+          className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-8 items-center text-center">
+          طلبات المساعدة قيد التنفيذ
+        </div>
+        <div
+          dir="rtl"
+          className="px-2 md:px-16 justify-center items-center grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
+          {isLoading && (
+            <p className="w-full flex justify-center">يتم التحميل الآن</p>
+          )}
+          {requestAidsPending?.length ? (
+            requestAidsPending.map((request) => (
+              <ListItem
+                key={request.id}
+                id={request.id}
+                status={request.status}
+                onClick={() => handleClick(request)}
+                aidType={request.category}
+                address={request.address}
+                membersCount={request.familyMembers}
+                date={request.dateAdded}
+                fullDescription={request.description}
+              />
+            ))
+          ) : (
+            <div className="w-full text-center text-primary-100 font-semibold">
+              لا يوجد طلبات حالياً
             </div>
-          </div>
-          <div className="w-full text-center text-xl text-primary pt-4">
-            <span>• • •</span>
-          </div>
-          <div>
-            <div
-              dir="rtl"
-              className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-8 items-center text-center">
-              طلبات المساعدة قيد التنفيذ
-            </div>
-            <div
-              dir="rtl"
-              className="w-full flex px-2 md:px-16 justify-center items-center grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
-              {isLoading && (
-                <p className="w-full flex justify-center">يتم التحميل الآن</p>
-              )}
-              {requestAidsPending?.length ? (
-                  requestAidsPending.map((request) => (
-                    <ListItem
-                      key={request.id}
-                      id={request.id}
-                      status={request.status}
-                      onClick={() => handleClick(request)}
-                      aidType={request.category}
-                      address={request.address}
-                      membersCount={request.familyMembers}
-                      date={request.dateAdded}
-                      fullDescription={request.description}
-                    />
-                  ))
-              ) : (
-                <div className="w-full text-center text-primary-100 font-semibold">
-                    لا يوجد طلبات حالياً
-                </div>
-              )}
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </>

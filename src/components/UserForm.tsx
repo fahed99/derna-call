@@ -20,7 +20,7 @@ function UserForm() {
     phoneNum1: '',
     phoneNum2: ''
   });
-  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [isPopUpOpen, setIsPopUpOpen] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
