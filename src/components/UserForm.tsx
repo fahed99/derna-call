@@ -100,7 +100,7 @@ function UserForm() {
             <p
               dir="rtl"
               onClick={() => setIsPopUpOpen(true)}
-              className="text-sm text-primary underline rtl text-center">
+              className="text-sm text-primary underline rtl text-center cursor-pointer">
               الارشادات والتعليمات💡
             </p>
           </div>

@@ -53,34 +53,33 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           <div>
             <div
               dir="rtl"
-              className="w-full flex flex-col sm:flex-row gap-3 items-start sm:items-baseline px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-8">
-              <span className="order-2 sm:order-none">
+              className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-8 items-center text-center">
+              <div className="order-2">
                 طلبات المساعدة المتاحة حاليا
-              </span>
-              <p
+              </div>
+              <div
                 dir="rtl"
                 onClick={() => setIsPopUpOpen(true)}
-                className="text-sm order-1 sm:order-none text-primary underline rtl text-center">
+                className="w-fit text-sm order-1 text-primary pr-2 py-2 cursor-pointer underline">
                 الارشادات والتعليمات💡
-              </p>
+              </div>
             </div>
 
             <div
               dir="rtl"
-              className="w-full px-2 md:px-16 justify-center sm:justify-start grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
+              className="w-full px-2 md:px-16 justify-center gap-10 md:gap-10 lg:gap-10">
               {isLoading && (
                 <p className="w-full flex justify-center">يتم التحميل الآن</p>
               )}
-
               {isError && (
-                <div className="w-full mt-6 text-red font-semibold text-xl rounded-xl border-2 border-grey-50 flex justify-center py-4 px-4">
+                <p className="w-full text-center text-red-600 font-semibold text-xl justify-center">
                   حدث خطأ
-                </div>
+                </p>
               )}
 
               {!requestAidsOpen?.length && (
-                <div className="w-full flex flex-col items-center md:items-start justify-center">
-                  <div className="md:w-[60%] lg:w-[50%] w-[35%]">
+                <div className="w-full flex flex-col items-center justify-center">
+                  <div className="md:w-[30%] lg:w-[30%] xl:w-[40%] w-[35%]">
                     <Image src={NoRequests} alt="no-requests" />
                   </div>
                   <div className="md:w-[60%] lg:w-[50%] w-[35%] flex flex-col items-center pt-2 gap-3">
@@ -97,6 +96,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
                   </div>
                 </div>
               )}
+
               {requestAidsOpen?.length
                 ? requestAidsOpen.map((request) => (
                     <ListItem
@@ -117,43 +117,35 @@ const RequestsList: NextPage<Props> = (props: Props) => {
           <div className="w-full text-center text-xl text-primary pt-4">
             <span>• • •</span>
           </div>
-          {/* // Change text to "Current pending orders" */}
           <div>
             <div
               dir="rtl"
-              className="w-full px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-8">
+              className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-8 items-center text-center">
               طلبات المساعدة قيد التنفيذ
             </div>
             <div
               dir="rtl"
-              className="w-full px-2 md:px-16 justify-center sm:justify-start grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
+              className="w-full flex px-2 md:px-16 justify-center sm:justify-start grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
               {isLoading && (
                 <p className="w-full flex justify-center">يتم التحميل الآن</p>
               )}
               {requestAidsPending?.length ? (
-                requestAidsPending.map((request) => (
-                  <ListItem
-                    key={request.id}
-                    id={request.id}
-                    status={request.status}
-                    onClick={() => handleClick(request)}
-                    aidType={request.category}
-                    address={request.address}
-                    membersCount={request.familyMembers}
-                    date={request.dateAdded}
-                    fullDescription={request.description}
-                  />
-                ))
+                  requestAidsPending.map((request) => (
+                    <ListItem
+                      key={request.id}
+                      id={request.id}
+                      status={request.status}
+                      onClick={() => handleClick(request)}
+                      aidType={request.category}
+                      address={request.address}
+                      membersCount={request.familyMembers}
+                      date={request.dateAdded}
+                      fullDescription={request.description}
+                    />
+                  ))
               ) : (
-                <div className="w-full flex flex-col items-center md:items-start justify-center">
-                  <div className="md:w-[60%] lg:w-[50%] w-[35%]">
-                    <Image src={NoRequests} alt="no-requests" />
-                  </div>
-                  <div className="md:w-[60%] lg:w-[50%] w-[35%] flex flex-col items-center pt-2 gap-3">
-                    <p className="text-primary-100 font-semibold">
-                      لا يوجد طلبات حالياً
-                    </p>
-                  </div>
+                <div className="w-full text-center text-primary-100 font-semibold">
+                    لا يوجد طلبات حالياً
                 </div>
               )}
             </div>

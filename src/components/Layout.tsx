@@ -17,7 +17,7 @@ const Layout: FC<Props> = (props) => {
       {router.asPath !== '/' ? (
         <div className="absolute top-0 left-0 p-3">
           <Image
-            className="cursor-pointer bg-white rounded-full"
+            className="cursor-pointer bg-white rounded-full px-1"
             onClick={() => router.back()}
             height={32}
             width={32}
