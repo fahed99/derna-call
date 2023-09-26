@@ -56,7 +56,7 @@ const ListItem: FC<Props> = (props) => {
           </div>
         </div>
         <div className="flex w-full">
-          <div className="md:w-[65%] flex gap-[25%]">
+          <div className="md:w-[65%] w-[60%] flex gap-[25%]">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col text-right gap-0.5">
                 <div className="text-md font-semibold text-grey-100">
@@ -75,7 +75,7 @@ const ListItem: FC<Props> = (props) => {
             </div>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col text-right gap-0.5">
-                <div className="text-md font-semibold text-grey-100">
+                <div className="text-m whitespace-nowrap font-semibold text-grey-100">
                   نوع الطلب
                 </div>
                 <div className="text-sm font-regular text-grey-100">
@@ -87,12 +87,12 @@ const ListItem: FC<Props> = (props) => {
                   العنوان
                 </div>
                 <div className="text-sm font-regular text-grey-100">
-                  {address}
+                  {address ? address : 'مجهول'}
                 </div>
               </div>
             </div>
           </div>
-          <div className="items-left w-[40%] md:w-[35%] pl-0.5 py-8">
+          <div className="w-[40%] md:w-[35%] pl-0.5 py-8">
             <Image
               src={
                 aidType === 'دواء'
