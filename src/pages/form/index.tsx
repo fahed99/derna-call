@@ -1,11 +1,21 @@
-import { GetStaticProps, NextPage } from 'next';
-import { QueryClient, dehydrate } from '@tanstack/react-query';
+import { NextPage } from 'next';
 import UserForm from '@components/UserForm';
+import { NextSeo } from 'next-seo';
 
-const SubmitRequest: NextPage = () => {
-  return <UserForm />;
+const RequestForm: NextPage = () => {
+  return (
+    <>
+      <NextSeo
+        title={`Derna Call - Form`}
+        description={
+          'A project to help those damaged by the floods in the great city of Derna.'
+        }
+      />
+      <UserForm />
+    </>
+  );
 };
-export default SubmitRequest;
+export default RequestForm;
 
 // export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 // 	// const requestID = params!.id as string;

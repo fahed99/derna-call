@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC } from 'react';
 
 interface Props {
   maxLength: number;

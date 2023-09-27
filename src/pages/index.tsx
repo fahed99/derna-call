@@ -7,12 +7,19 @@ import FacebookIcon from '@icons/FacebookIcon';
 import InstagramIcon from '@icons/InstagramIcon';
 import { useState } from 'react';
 import GuidePopUp from '@components/GuidePopUp';
+import { NextSeo } from 'next-seo';
 
 export default function Home() {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
 
   return (
     <>
+      <NextSeo
+        title="Derna Call - Home"
+        description={
+          'A project to help those damaged by the floods in the great city of Derna.'
+        }
+      />
       <GuidePopUp isOpen={isPopUpOpen} setIsOpen={setIsPopUpOpen} type="both" />
       <div className="h-screen min-h-[900px] flex flex-col gap-5 justify-center items-center text-grey-50">
         <BlueEllipse />
@@ -42,7 +49,7 @@ export default function Home() {
                 title={'تقديم الدعم'}
               />
             </Link>
-            <Link prefetch href={'/submit'} className="cursor-pointer">
+            <Link prefetch href={'/form'} className="cursor-pointer">
               <Button
                 className="max-w-[140px] text-sm"
                 type="primary"

@@ -11,6 +11,7 @@ import { getRequestByID, useRequestById } from '@hooks/getRequestByID';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import CallPopUp from '@components/CallPopUp';
+import { NextSeo } from 'next-seo';
 
 type Props = {
   requestID: string;
@@ -59,6 +60,12 @@ const Request: NextPage<Props> = (props: Props) => {
 
   return (
     <>
+      <NextSeo
+        title={`Request #${id}`}
+        description={
+          'A project to help those damaged by the floods in the great city of Derna.'
+        }
+      />
       <CallPopUp
         isOpen={isPopUpOpen}
         setIsOpen={setIsPopUpOpen}

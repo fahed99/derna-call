@@ -11,12 +11,9 @@ import { AidRequest } from '@customTypes/AidRequest';
 import NoRequests from '@images/no-requests.png';
 import GuidePopUp from '@components/GuidePopUp';
 import Button from '@components/Button';
+import { NextSeo } from 'next-seo';
 
-type Props = {
-  requestID?: string;
-};
-
-const RequestsList: NextPage<Props> = (props: Props) => {
+const RequestsList: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: requestAidsOpen, isLoading, isError } = useRequests('open');
   const { data: requestAidsPending } = useRequests('pending');
@@ -31,6 +28,12 @@ const RequestsList: NextPage<Props> = (props: Props) => {
 
   return (
     <>
+      <NextSeo
+        title={`Derna Call - Requests`}
+        description={
+          'A project to help those damaged by the floods in the great city of Derna.'
+        }
+      />
       <GuidePopUp
         isOpen={isPopUpOpen}
         setIsOpen={setIsPopUpOpen}
@@ -86,7 +89,7 @@ const RequestsList: NextPage<Props> = (props: Props) => {
                 <p className="text-primary-100 whitespace-nowrap font-semibold">
                   لا يوجد طلبات حالياً
                 </p>
-                <Link href={'/submit'}>
+                <Link href={'/form'}>
                   <Button
                     className="w-fit whitespace-nowrap"
                     type="secondary"

@@ -1,11 +1,4 @@
-import {
-  Dispatch,
-  FC,
-  MouseEvent,
-  SetStateAction,
-  useEffect,
-  useState
-} from 'react';
+import { Dispatch, FC, MouseEvent, SetStateAction } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import close from '@images/cancel.png';

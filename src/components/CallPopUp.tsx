@@ -1,18 +1,10 @@
-import {
-  Dispatch,
-  FC,
-  MouseEvent,
-  SetStateAction,
-  useEffect,
-  useState
-} from 'react';
+import { Dispatch, FC, MouseEvent, SetStateAction, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import close from '@images/cancel.png';
 import Link from 'next/link';
 import Button from './Button';
 import { AidRequest } from '@customTypes/AidRequest';
-import ValuedFields from './ValuedFields';
 import { useRouter } from 'next/router';
 import CallIcon from '@icons/Call';
 
