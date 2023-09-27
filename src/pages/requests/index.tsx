@@ -55,7 +55,7 @@ const RequestsList: NextPage = () => {
 
         <div
           dir="rtl"
-          className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-8 items-center text-center">
+          className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold pb-1 text-2xl items-center text-center">
           <div className="order-2">طلبات المساعدة المتاحة حاليا</div>
           <div
             dir="rtl"
@@ -67,9 +67,9 @@ const RequestsList: NextPage = () => {
 
         <div
           dir="rtl"
-          className={`w-full px-2 md:px-16 justify-center items-center ${
+          className={`px-2 md:px-16 justify-center items-center ${
             requestAidsOpen?.length
-              ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 '
+              ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'
               : ''
           } gap-10 md:gap-10 lg:gap-10`}>
           {isLoading && (
@@ -122,7 +122,7 @@ const RequestsList: NextPage = () => {
 
         <div
           dir="rtl"
-          className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-8 items-center text-center">
+          className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-1 items-center text-center">
           طلبات المساعدة قيد التنفيذ
         </div>
         <div
