@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
   // Set the CORS headers
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // Note: In production, replace '*' with your actual origin like 'http://localhost:3000'
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Note: In production, replace '*' with your actual origin like 'http://localhost:3000'
   res.setHeader(
     'Access-Control-Allow-Methods',
     'GET, POST, PUT, DELETE, PATCH, OPTIONS'
@@ -71,7 +71,12 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (status) {
-      if (status === 'open' || status === 'pending' || status === 'resolved' || status === 'closed') {
+      if (
+        status === 'open' ||
+        status === 'pending' ||
+        status === 'resolved' ||
+        status === 'closed'
+      ) {
         // If no ID provided, return all aidRequests
         const aidRequests = await prisma.aidRequest.findMany({
           where: {
@@ -80,7 +85,12 @@ const aidRequest = async (req: NextApiRequest, res: NextApiResponse) => {
         });
         res.status(200).json(aidRequests);
       } else {
-        res.status(400).json({ message: 'Please use an existing status such as: open, closed, pending, resolved' });
+        res
+          .status(400)
+          .json({
+            message:
+              'Please use an existing status such as: open, closed, pending, resolved'
+          });
       }
     } else {
       // If neither ID nor status is provided, return all aidRequests
