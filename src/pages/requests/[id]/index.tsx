@@ -110,7 +110,12 @@ const Request: NextPage<Props> = (props: Props) => {
                   : 'مجهول'
               }
             />
+            <ValuedFields
+              field={'عدد الأفراد'}
+              value={aidRequest.familyMembers.toString()}
+            />
             <ValuedFields field={'وصف الطلب'} value={aidRequest.description} />
+
             <button
               className="w-full flex justify-center pt-2"
               onClick={handleComplete}
