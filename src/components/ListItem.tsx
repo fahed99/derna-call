@@ -36,7 +36,7 @@ const ListItem: FC<Props> = (props) => {
     backgroundColor = 'bg-resolved';
     borderColor = 'border-resolved';
     textColor = 'text-resolved';
-    textString = 'تم الحل';
+    textString = 'مغلقة';
   }
 
   return (

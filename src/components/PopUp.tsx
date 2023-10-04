@@ -33,7 +33,7 @@ const Popup: FC<Props> = (props: Props) => {
       backgroundColor = 'bg-resolved';
       borderColor = 'border-resolved';
       textColor = 'text-resolved';
-      textString = 'تم الحل';
+      textString = 'مغلقة';
     }
   }
 
