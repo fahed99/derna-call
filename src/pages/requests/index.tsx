@@ -17,6 +17,9 @@ const RequestsList: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: requestAidsOpen, isLoading, isError } = useRequests('open');
   const { data: requestAidsPending } = useRequests('pending');
+  const { data: requestAidsClose } = useRequests('closed');
+  const { data: requestAids } = useRequests();
+
   const [isPopUpOpen, setIsPopUpOpen] = useState(true);
   const [selectedRequestData, setSelectedRequestData] =
     useState<AidRequest | null>(null);
@@ -25,7 +28,20 @@ const RequestsList: NextPage = () => {
     setSelectedRequestData(request);
     setIsOpen(true);
   };
+  const Currentsection = 'open'
+  const handleSectionChange = (Currentsection : any) => {
 
+  
+    const section = document.getElementById(Currentsection);
+
+    if (section) {
+      window.scrollTo({
+        top: section.offsetTop - 100, 
+        behavior: 'smooth', 
+      });
+    }
+   }
+  
   return (
     <>
       <NextSeo
@@ -64,8 +80,28 @@ const RequestsList: NextPage = () => {
             الارشادات والتعليمات💡
           </div>
         </div>
-
+        <div className='flex gap-2.5'>
         <div
+          onClick={() => handleSectionChange('open')}
+          className={`rounded-lg shadow-none cursor-pointer font-semibold bg-open text-open-text w-fit py-1 px-2`}>
+          {'متاح'} {'('}{requestAidsOpen?.length}{')'}
+        </div>
+        <div
+          onClick={() => handleSectionChange('pending')}
+          className={`rounded-lg shadow-none cursor-pointer font-semibold bg-pending text-pending-text w-fit py-1 px-2`}>
+          {'قيد التنفيذ'} {'('}{requestAidsPending?.length}{')'}
+        </div>
+        <div
+          onClick={() => handleSectionChange('closed')}
+          className={`rounded-lg shadow-none cursor-pointer font-semibold bg-resolved text-resolved-text w-fit py-1 px-2`}>
+          {'مغلق'} {'('}{requestAidsClose?.length}{')'}
+        </div>
+      </div>
+        <div
+            className={`rounded-lg shadow-none font-semibold text-open-text w-fit py-1 px-2`}>
+             {'الكل'}{' '}{'('}{requestAids?.length}{')'}
+        </div>
+        <section id='open'
           dir="rtl"
           className={`px-2 md:px-16 justify-center items-center ${
             requestAidsOpen?.length
@@ -86,7 +122,7 @@ const RequestsList: NextPage = () => {
                 <Image src={NoRequests} alt="no-requests" />
               </div>
               <div className="md:w-[60%] lg:w-[50%] w-[35%] flex flex-col items-center pt-2 gap-3">
-                <p className="text-primary-100 whitespace-nowrap font-semibold">
+                <p className="text-primary-100 whitespace-nowrap font-semibold my-20">
                   لا يوجد طلبات حالياً
                 </p>
                 <Link href={'/form'}>
@@ -114,7 +150,7 @@ const RequestsList: NextPage = () => {
                 />
               ))
             : undefined}
-        </div>
+        </section>
 
         <div className="w-full text-center text-xl text-primary pt-4">
           <span>• • •</span>
@@ -125,7 +161,7 @@ const RequestsList: NextPage = () => {
           className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-1 items-center text-center">
           طلبات المساعدة قيد التنفيذ
         </div>
-        <div
+        <section id ='pending'
           dir="rtl"
           className="px-2 md:px-16 justify-center items-center grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
           {isLoading && (
@@ -146,11 +182,46 @@ const RequestsList: NextPage = () => {
               />
             ))
           ) : (
-            <div className="w-full text-center text-primary-100 font-semibold">
+            <div className="w-full text-center text-primary-100 font-semibold my-20">
               لا يوجد طلبات حالياً
             </div>
           )}
+        </section>
+        <div className="w-full text-center text-xl text-primary pt-4">
+          <span>• • •</span>
         </div>
+
+        <div
+          dir="rtl"
+          className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-1 items-center text-center">
+          طلبات المساعدة المغلقة
+        </div>
+        <section id ='closed'
+          dir="rtl"
+          className="px-2 md:px-16 justify-center items-center grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
+          {isLoading && (
+            <p className="w-full flex justify-center">يتم التحميل الآن</p>
+          )}
+          {requestAidsClose?.length ? (
+            requestAidsClose.map((request) => (
+              <ListItem
+                key={request.id}
+                id={request.id}
+                status={request.status}
+                onClick={() => handleClick(request)}
+                aidType={request.category}
+                address={request.address}
+                membersCount={request.familyMembers}
+                date={request.dateAdded}
+                fullDescription={request.description}
+              />
+            ))
+          ) : (
+            <div className="w-full text-center text-primary-100 font-semibold my-20">
+              لا يوجد طلبات حاليا
+            </div>
+          )}
+        </section>
       </div>
     </>
   );
