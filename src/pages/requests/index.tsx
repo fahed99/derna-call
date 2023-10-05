@@ -66,7 +66,38 @@ const RequestsList: NextPage = () => {
             requestData={selectedRequestData}
           />
         )}
-
+         <div className='flex flex-col items-center bg-white shadow-lg shadow-gray-300 rounded-lg p-3.5  lg:w-[40%] gap-2.5 '> 
+        <div className='text-lg font-semibold text-center whitespace-nowrap md:text-2xl'>الاحصائيات 📊</div>
+        <div className="flex gap-2.5">
+          <div
+            onClick={() => handleSectionChange('open')}
+            className={`rounded-lg shadow-none cursor-pointer whitespace-nowrap font-semibold bg-open text-open-text w-fit py-1 px-2`}>
+            {'متاح'} {'('}
+            {requestAidsOpen?.length}
+            {')'}
+          </div>
+          <div
+            onClick={() => handleSectionChange('pending')}
+            className={`rounded-lg shadow-none cursor-pointer whitespace-nowrap font-semibold bg-pending text-pending-text w-fit py-1 px-2`}>
+            {'قيد التنفيذ'} {'('}
+            {requestAidsPending?.length}
+            {')'}
+          </div>
+          <div
+            onClick={() => handleSectionChange('closed')}
+            className={`rounded-lg shadow-none cursor-pointer whitespace-nowrap font-semibold bg-resolved text-resolved-text w-fit py-1 px-2`}>
+            {'مغلق'} {'('}
+            {requestAidsClose?.length}
+            {')'}
+          </div>
+        </div>
+        <div
+          className={`rounded-lg shadow-none whitespace-nowrap font-semibold text-open-text w-fit py-1 px-2`}>
+          {'مجموع الطلبات'} {'('}
+          {requestAids?.length}
+          {')'}
+        </div>
+        </div>
         <div
           dir="rtl"
           className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold pb-1 text-2xl items-center text-center">
@@ -77,35 +108,6 @@ const RequestsList: NextPage = () => {
             className="w-fit text-sm order-1 text-primary pr-2 py-2 cursor-pointer underline">
             الارشادات والتعليمات💡
           </div>
-        </div>
-        <div className="flex gap-2.5">
-          <div
-            onClick={() => handleSectionChange('open')}
-            className={`rounded-lg shadow-none cursor-pointer font-semibold bg-open text-open-text w-fit py-1 px-2`}>
-            {'متاح'} {'('}
-            {requestAidsOpen?.length}
-            {')'}
-          </div>
-          <div
-            onClick={() => handleSectionChange('pending')}
-            className={`rounded-lg shadow-none cursor-pointer font-semibold bg-pending text-pending-text w-fit py-1 px-2`}>
-            {'قيد التنفيذ'} {'('}
-            {requestAidsPending?.length}
-            {')'}
-          </div>
-          <div
-            onClick={() => handleSectionChange('closed')}
-            className={`rounded-lg shadow-none cursor-pointer font-semibold bg-resolved text-resolved-text w-fit py-1 px-2`}>
-            {'مغلق'} {'('}
-            {requestAidsClose?.length}
-            {')'}
-          </div>
-        </div>
-        <div
-          className={`rounded-lg shadow-none font-semibold text-open-text w-fit py-1 px-2`}>
-          {'مجموع الطلبات'} {'('}
-          {requestAids?.length}
-          {')'}
         </div>
         <section
           id="open"
