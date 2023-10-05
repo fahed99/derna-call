@@ -28,20 +28,18 @@ const RequestsList: NextPage = () => {
     setSelectedRequestData(request);
     setIsOpen(true);
   };
-  const Currentsection = 'open'
-  const handleSectionChange = (Currentsection : any) => {
-
-  
+  const Currentsection = 'open';
+  const handleSectionChange = (Currentsection: any) => {
     const section = document.getElementById(Currentsection);
 
     if (section) {
       window.scrollTo({
-        top: section.offsetTop - 100, 
-        behavior: 'smooth', 
+        top: section.offsetTop - 100,
+        behavior: 'smooth'
       });
     }
-   }
-  
+  };
+
   return (
     <>
       <NextSeo
@@ -80,28 +78,37 @@ const RequestsList: NextPage = () => {
             الارشادات والتعليمات💡
           </div>
         </div>
-        <div className='flex gap-2.5'>
-        <div
-          onClick={() => handleSectionChange('open')}
-          className={`rounded-lg shadow-none cursor-pointer font-semibold bg-open text-open-text w-fit py-1 px-2`}>
-          {'متاح'} {'('}{requestAidsOpen?.length}{')'}
+        <div className="flex gap-2.5">
+          <div
+            onClick={() => handleSectionChange('open')}
+            className={`rounded-lg shadow-none cursor-pointer font-semibold bg-open text-open-text w-fit py-1 px-2`}>
+            {'متاح'} {'('}
+            {requestAidsOpen?.length}
+            {')'}
+          </div>
+          <div
+            onClick={() => handleSectionChange('pending')}
+            className={`rounded-lg shadow-none cursor-pointer font-semibold bg-pending text-pending-text w-fit py-1 px-2`}>
+            {'قيد التنفيذ'} {'('}
+            {requestAidsPending?.length}
+            {')'}
+          </div>
+          <div
+            onClick={() => handleSectionChange('closed')}
+            className={`rounded-lg shadow-none cursor-pointer font-semibold bg-resolved text-resolved-text w-fit py-1 px-2`}>
+            {'مغلق'} {'('}
+            {requestAidsClose?.length}
+            {')'}
+          </div>
         </div>
         <div
-          onClick={() => handleSectionChange('pending')}
-          className={`rounded-lg shadow-none cursor-pointer font-semibold bg-pending text-pending-text w-fit py-1 px-2`}>
-          {'قيد التنفيذ'} {'('}{requestAidsPending?.length}{')'}
+          className={`rounded-lg shadow-none font-semibold text-open-text w-fit py-1 px-2`}>
+          {'مجموع الطلبات'} {'('}
+          {requestAids?.length}
+          {')'}
         </div>
-        <div
-          onClick={() => handleSectionChange('closed')}
-          className={`rounded-lg shadow-none cursor-pointer font-semibold bg-resolved text-resolved-text w-fit py-1 px-2`}>
-          {'مغلق'} {'('}{requestAidsClose?.length}{')'}
-        </div>
-      </div>
-        <div
-            className={`rounded-lg shadow-none font-semibold text-open-text w-fit py-1 px-2`}>
-             {'الكل'}{' '}{'('}{requestAids?.length}{')'}
-        </div>
-        <section id='open'
+        <section
+          id="open"
           dir="rtl"
           className={`px-2 md:px-16 justify-center items-center ${
             requestAidsOpen?.length
@@ -161,7 +168,8 @@ const RequestsList: NextPage = () => {
           className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-1 items-center text-center">
           طلبات المساعدة قيد التنفيذ
         </div>
-        <section id ='pending'
+        <section
+          id="pending"
           dir="rtl"
           className="px-2 md:px-16 justify-center items-center grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
           {isLoading && (
@@ -196,7 +204,8 @@ const RequestsList: NextPage = () => {
           className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold text-2xl pb-1 items-center text-center">
           طلبات المساعدة المغلقة
         </div>
-        <section id ='closed'
+        <section
+          id="closed"
           dir="rtl"
           className="px-2 md:px-16 justify-center items-center grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-10 lg:gap-10">
           {isLoading && (
