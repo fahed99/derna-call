@@ -56,7 +56,7 @@ const RequestsList: NextPage = () => {
       <div dir="rtl" className="h-full pb-14 flex items-center flex-col gap-4">
         <Link
           href={'/'}
-          className="w-[240px] md:w-[25%] lg:w-[20%] py-6 flex justify-center">
+          className="w-[240px] md:w-[25%] lg:w-[20%] py-6 pt-28 flex justify-center">
           <Image priority src={MainLogo} alt="Logo" />
         </Link>
         {selectedRequestData && (
@@ -129,7 +129,7 @@ const RequestsList: NextPage = () => {
           )}
           {!requestAidsOpen?.length && (
             <div className="w-full flex flex-col items-center justify-center">
-              <div className="sm:w-[40%] md:w-[40%] flex  lg:w-[35%] xl:w-[25%] w-[35%]">
+              <div className="sm:w-[40%] md:w-[40%] flex lg:w-[35%] xl:w-[25%] w-[35%]">
                 <Image src={NoRequests} alt="no-requests" />
               </div>
               <div className="md:w-[60%] lg:w-[50%] w-[35%] flex flex-col items-center pt-2 gap-3">
