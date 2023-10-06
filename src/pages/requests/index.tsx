@@ -66,7 +66,7 @@ const RequestsList: NextPage = () => {
             requestData={selectedRequestData}
           />
         )}
-        <div className="flex flex-col items-center bg-white shadow-lg shadow-gray-300 rounded-lg p-3.5  lg:w-[40%] gap-2.5 ">
+        <div className="flex flex-col items-center bg-white shadow-lg shadow-gray-300 rounded-lg p-3.5 lg:w-[40%] gap-2.5 ">
           <div className="text-lg font-semibold text-center whitespace-nowrap md:text-2xl">
             الاحصائيات 📊
           </div>
@@ -102,7 +102,7 @@ const RequestsList: NextPage = () => {
         </div>
         <div
           dir="rtl"
-          className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold pb-1 text-2xl items-center text-center">
+          className="flex flex-col px-2 md:px-16 text-grey-100 font-semibold pb-1 text-2xl items-center text-center py-8">
           <div className="order-2">طلبات المساعدة المتاحة حاليا</div>
           <div
             dir="rtl"
@@ -163,7 +163,7 @@ const RequestsList: NextPage = () => {
             : undefined}
         </section>
 
-        <div className="w-full text-center text-xl text-primary pt-4">
+        <div className="w-full text-center text-xl text-primary pt-8">
           <span>• • •</span>
         </div>
 
@@ -199,7 +199,7 @@ const RequestsList: NextPage = () => {
             </div>
           )}
         </section>
-        <div className="w-full text-center text-xl text-primary pt-4">
+        <div className="w-full text-center text-xl text-primary pt-8">
           <span>• • •</span>
         </div>
 
