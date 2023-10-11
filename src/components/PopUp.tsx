@@ -32,8 +32,8 @@ const Popup: FC<Props> = (props: Props) => {
     } else {
       backgroundColor = 'bg-resolved';
       borderColor = 'border-resolved';
-      textColor = 'text-resolved';
-      textString = 'تم الحل';
+      textColor = 'text-resolved-text';
+      textString = 'مغلقة';
     }
   }
 
@@ -143,16 +143,16 @@ const Popup: FC<Props> = (props: Props) => {
                   </div>
                 </div>
                 <div className="pt-6 w-full flex justify-center">
-                  {requestData.status === 'pending' ? (
+                  {requestData.status === 'open' ? (
+                    <Link href={'/requests/' + requestData.id}>
+                      <Button type="primary" title="تقديم الدعم" />
+                    </Link>
+                  ) : (
                     <Button
                       type="primary"
                       title="تقديم الدعم"
                       className="cursor-not-allowed opacity-40"
                     />
-                  ) : (
-                    <Link href={'/requests/' + requestData.id}>
-                      <Button type="primary" title="تقديم الدعم" />
-                    </Link>
                   )}
                 </div>
               </>

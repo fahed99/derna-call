@@ -10,8 +10,9 @@ const config: Config = {
           100: '#1E3C63'
         },
         grey: {
-          50: '#AAAAAA',
-          100: '#3B434C'
+          50: '#F0F2F4',
+          100: '#3B434C',
+          700: '#3E4A5C'
         },
         pending: {
           DEFAULT: '#F9E7B9',
