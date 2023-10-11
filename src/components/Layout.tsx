@@ -12,7 +12,7 @@ const Layout: FC<Props> = (props) => {
   const router = useRouter();
 
   return (
-    <div className="text-grey-100 bg-background flex relative overflow-x-hidden w-full justify-center">
+    <div className="text-grey-100 flex relative overflow-x-hidden w-full justify-center">
       {router.asPath !== '/' ? (
         <div className="absolute top-0 left-0 p-3">
           <Image

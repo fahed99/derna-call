@@ -49,8 +49,6 @@ const TextField: FC<Props> = (props) => {
               <option value={'سكن'} />
               <option value={'غذاء'} />
               <option value={'دواء'} />
-              <option value={'ملابس'} />
-              <option value={'أجهزة'} />
             </datalist>
           ) : undefined}
         </>
