@@ -2,7 +2,7 @@ export interface AidRequest {
   id: number;
   firstName?: string;
   address?: string;
-  category: 'housing' | 'housing(rent)' | 'medicine' | 'food' | 'clothing' | 'appliances' | 'other';
+  category: string;
   description: string;
   dateAdded: string;
   dateResolved?: string;
@@ -11,5 +11,5 @@ export interface AidRequest {
   phoneNum2?: string;
   tweetId?: string;
   status: 'open' | 'closed' | 'pending' | 'resolved';
-  callsCount: number;
+  callsCount?: number;
 }
