@@ -4,6 +4,9 @@ import Image from 'next/image';
 import Medicine from '@images/medicine.png';
 import Food from '@images/food.png';
 import Housing from '@images/housing.png';
+import Furniture from '@images/furniture.png';
+import Appliance from '@images/appliance.png';
+import Clothing from '@images/clothing.png';
 import Other from '@images/other.png';
 
 interface Props {
@@ -42,6 +45,43 @@ const ListItem: FC<Props> = (props) => {
     textString = 'مغلقة';
     buttonType = 'resolved-request';
   }
+
+  const foodKeywords = ['أكل', 'غذاء', 'اغاثة', 'مؤونة'];
+  const medicineKeywords = ['دواء', 'علاج', 'طبي'];
+  const housingKeywords = ['سكن', 'مسكن', 'منزل'];
+  const furnitureKeywords = ['أثاث', 'كماليات'];
+  const applianceKeywords = [
+    'أجهزة',
+    'كهربائية',
+    'كهرومنزلية',
+    'ثلاجة',
+    'تلاجة'
+  ];
+  const clothingKeywords = ['ملابس', 'دبش', 'كويش', 'ملبس'];
+
+  const getAidCategory = () => {
+    if (isStringContainsKeyword(foodKeywords)) {
+      return Food;
+    } else if (isStringContainsKeyword(medicineKeywords)) {
+      return Medicine;
+    } else if (isStringContainsKeyword(furnitureKeywords)) {
+      return Furniture;
+    } else if (isStringContainsKeyword(applianceKeywords)) {
+      return Appliance;
+    } else if (isStringContainsKeyword(clothingKeywords)) {
+      return Clothing;
+    } else if (isStringContainsKeyword(housingKeywords)) {
+      return Housing;
+    } else {
+      return Other;
+    }
+  };
+
+  const isStringContainsKeyword = (keywords: Array<string>) =>
+    keywords.some((keyword) => {
+      const regex = new RegExp(keyword, 'i');
+      return regex.test(aidType);
+    });
 
   return (
     <>
@@ -97,18 +137,7 @@ const ListItem: FC<Props> = (props) => {
             </div>
           </div>
           <div className="w-[40%] md:w-[35%] pl-0.5 py-8">
-            <Image
-              src={
-                aidType === 'دواء'
-                  ? Medicine
-                  : aidType === 'غذاء'
-                  ? Food
-                  : aidType === 'سكن'
-                  ? Housing
-                  : Other
-              }
-              alt={aidType}
-            />
+            <Image src={getAidCategory()} alt={aidType} />
           </div>
         </div>
         <div className="relative w-[100px]">
